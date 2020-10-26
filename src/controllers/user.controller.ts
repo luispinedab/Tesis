@@ -2,10 +2,11 @@ import {Request,Response} from 'express';
 import {getRepository}from 'typeorm';
 import {user}from '../entity/User'
 export const getUsers = async(req:Request,res:Response):Promise<Response>=>{
+
     const results = await getRepository(user).find();
     return res.json(results);
 };
-export const createUser = async(req:Request,res:Response):Promise<Response>=>{
+/*export const createUser = async(req:Request,res:Response):Promise<Response>=>{
      const newUser = getRepository(user).create(req.body);
      const results = await getRepository(user).save(newUser);
      console.log("Guardado",req.body);
@@ -27,4 +28,4 @@ export const updateUser = async(req:Request,res:Response):Promise<Response>=>{
 export const deleteUser = async(req:Request,res:Response):Promise<Response>=>{
     const results = await getRepository(user).delete(req.params.id);
     return res.json(results);
-};
+};*/
