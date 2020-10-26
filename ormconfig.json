@@ -1,0 +1,14 @@
+{
+    "type": "mssql",
+    "host": "localhost\\SQLEXPRESS",
+    "port": 1433,
+    "username": "lorena",
+    "password": "1234",
+    "database": "Test",
+    "entities" : ["dist/entity/**/*.js"],
+    "synchronize":true,
+    "options": {
+        "encrypt": true,
+        "enableArithAbort": true
+        }
+ }
