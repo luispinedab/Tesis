@@ -36,14 +36,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = void 0;
+exports.getTipoUsuario = void 0;
 var typeorm_1 = require("typeorm");
-var Usuario_1 = require("../entity/Usuario");
-exports.getUsers = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+var TipoUsuario_1 = require("../entity/TipoUsuario");
+exports.getTipoUsuario = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var results;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, typeorm_1.getRepository(Usuario_1.Usuario).find({ relations: ['idTipoUsuario'] })];
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(TipoUsuario_1.TipoUsuario).find()];
             case 1:
                 results = _a.sent();
                 return [2 /*return*/, res.json(results)];

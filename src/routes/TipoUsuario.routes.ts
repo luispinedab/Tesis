@@ -2,8 +2,8 @@ import {Router} from 'express';
 const router = Router();
 
 //import {getUsers,createUser,getUser, updateUser, deleteUser} from '../controllers/user.controller';
-import {getUsers} from '../controllers/user.controller';
-router.get('/Usuarios', getUsers);
+import {getTipoUsuario} from '../controllers/TipoUsuario.controller';
+router.get('/Tipo   Usuarios', getTipoUsuario);
 /*router.post('/users', createUser);
 router.get('/users/:id', getUser);
 router.put('/users/:id', updateUser);

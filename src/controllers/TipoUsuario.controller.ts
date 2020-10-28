@@ -1,8 +1,8 @@
 import {Request,Response} from 'express';
 import {getRepository}from 'typeorm';
-import {Usuario}from '../entity/Usuario';
-export const getUsers = async(req:Request,res:Response):Promise<Response>=>{
-    const results = await getRepository(Usuario).find({relations:['idTipoUsuario']});
+import {TipoUsuario}from '../entity/TipoUsuario';
+export const getTipoUsuario = async(req:Request,res:Response):Promise<Response>=>{
+    const results = await getRepository(TipoUsuario).find();
     return res.json(results);
 };
 /*export const createUser = async(req:Request,res:Response):Promise<Response>=>{
