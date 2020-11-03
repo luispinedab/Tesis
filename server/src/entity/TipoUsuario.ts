@@ -1,8 +1,8 @@
 import {Entity,Column,PrimaryColumn} from "typeorm";
 @Entity()
-export class TipoUsuario{
+export class UserType{
     @PrimaryColumn()
-    IDTipoUsuario:number;
+    IDUserType:number;
     @Column()
-    TipoUsuario:string;
+    UserType:string;
 }

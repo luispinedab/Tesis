@@ -1,0 +1,22 @@
+.table {
+    display: table;
+}
+
+.header-table {
+    display: table-row;
+    font-weight: bold;
+    text-align: center;
+}
+
+.row-table {
+    display: table-row;
+}
+
+.header-item,
+.row-item {
+    display: table-cell;
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+}

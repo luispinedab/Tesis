@@ -9,22 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TipoUsuario = void 0;
+exports.UserType = void 0;
 var typeorm_1 = require("typeorm");
-var TipoUsuario = /** @class */ (function () {
-    function TipoUsuario() {
+var UserType = /** @class */ (function () {
+    function UserType() {
     }
     __decorate([
         typeorm_1.PrimaryColumn(),
         __metadata("design:type", Number)
-    ], TipoUsuario.prototype, "IDTipoUsuario", void 0);
+    ], UserType.prototype, "IDUserType", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], TipoUsuario.prototype, "TipoUsuario", void 0);
-    TipoUsuario = __decorate([
+    ], UserType.prototype, "UserType", void 0);
+    UserType = __decorate([
         typeorm_1.Entity()
-    ], TipoUsuario);
-    return TipoUsuario;
+    ], UserType);
+    return UserType;
 }());
-exports.TipoUsuario = TipoUsuario;
+exports.UserType = UserType;

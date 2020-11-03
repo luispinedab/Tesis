@@ -1,29 +1,27 @@
 import {Entity, Column, PrimaryGeneratedColumn,OneToOne, JoinColumn} from 'typeorm';
 import { type } from 'os';
-import { TipoUsuario } from './TipoUsuario';
+import { UserType } from './TipoUsuario';
 
 @Entity()
-export class Usuario {
+export class User {
     @PrimaryGeneratedColumn()
-    IDUsuario:number;
+    IDUser:number;
     @Column()
-    Nombres: string;
+    Name: string;
     @Column()
-    Apellidos: string;
+    Lastname: string;
     @Column()
-    Identificación: number;
-    @OneToOne(type=>TipoUsuario)@JoinColumn()
-    idTipoUsuario: TipoUsuario;
+    Identification: number;
+    @OneToOne(type=>UserType)@JoinColumn()
+    IDUserType: UserType;
     @Column()
-    Mail: string;
+    Email: string;
     @Column()
-    Celular: string;
+    PhoneNumber: string;
     @Column()
-    Usuario: string;
+    Nickname: string;
     @Column()
-    Contraseña: string;
+    Password: string;
     @Column()
-    Estado: number;
-
-
+    UserState: number;
 }

@@ -9,56 +9,56 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Usuario = void 0;
+exports.User = void 0;
 var typeorm_1 = require("typeorm");
 var TipoUsuario_1 = require("./TipoUsuario");
-var Usuario = /** @class */ (function () {
-    function Usuario() {
+var User = /** @class */ (function () {
+    function User() {
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
-    ], Usuario.prototype, "IDUsuario", void 0);
+    ], User.prototype, "IDUser", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Usuario.prototype, "Nombres", void 0);
+    ], User.prototype, "Name", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Usuario.prototype, "Apellidos", void 0);
+    ], User.prototype, "Lastname", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", Number)
-    ], Usuario.prototype, "Identificaci\u00F3n", void 0);
+    ], User.prototype, "Identification", void 0);
     __decorate([
-        typeorm_1.OneToOne(function (type) { return TipoUsuario_1.TipoUsuario; }),
+        typeorm_1.OneToOne(function (type) { return TipoUsuario_1.UserType; }),
         typeorm_1.JoinColumn(),
-        __metadata("design:type", TipoUsuario_1.TipoUsuario)
-    ], Usuario.prototype, "idTipoUsuario", void 0);
+        __metadata("design:type", TipoUsuario_1.UserType)
+    ], User.prototype, "IDUserType", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Usuario.prototype, "Mail", void 0);
+    ], User.prototype, "Email", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Usuario.prototype, "Celular", void 0);
+    ], User.prototype, "PhoneNumber", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Usuario.prototype, "Usuario", void 0);
+    ], User.prototype, "Nickname", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Usuario.prototype, "Contrase\u00F1a", void 0);
+    ], User.prototype, "Password", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", Number)
-    ], Usuario.prototype, "Estado", void 0);
-    Usuario = __decorate([
+    ], User.prototype, "UserState", void 0);
+    User = __decorate([
         typeorm_1.Entity()
-    ], Usuario);
-    return Usuario;
+    ], User);
+    return User;
 }());
-exports.Usuario = Usuario;
+exports.User = User;

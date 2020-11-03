@@ -43,7 +43,7 @@ exports.getUsers = function (req, res) { return __awaiter(void 0, void 0, void 0
     var results;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, typeorm_1.getRepository(Usuario_1.Usuario).find({ relations: ['idTipoUsuario'] })];
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(Usuario_1.User).find({ relations: ['IDUserType'] })];
             case 1:
                 results = _a.sent();
                 return [2 /*return*/, res.json(results)];
