@@ -1,21 +1,37 @@
-<div class="table">
-  <div class="header-table">
-    <div class="header-item item-1">Nombre</div>
-    <div class="header-item item-2">Identificación</div>
-    <div class="header-item item-3">Email</div>
-    <div class="header-item item-4">Celular</div>
-    <div class="header-item item-5">Usuario</div>
-    <div class="header-item item-6">Estado</div>
-    <div class="header-item item-7">Tipo de Usuario</div>
-  </div>
-
-  <div class="row-table" *ngFor="let usuario of usuarios;">
-    <div class="row-item item-1">{{usuario.Name}}&nbsp;{{usuario.Lastname}}</div>
-    <div class="row-item item-2">{{usuario.Identification}} </div>
-    <div class="row-item item-3">{{usuario.Email}}</div>
-    <div class="row-item item-4">{{usuario.PhoneNumber}}</div>
-    <div class="row-item item-5">{{usuario.Nickname}}</div>
-    <div class="row-item item-6">{{usuario.UserState}}</div>
-    <div class="row-item item-7">{{usuario.IDUserType.UserType}}</div>
+<div class="container">
+  <div class="row">
+    <div class="card shadow mb-4 col-8">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Identificación</th>
+              <th>Email</th>
+              <th>Celular</th>
+              <th>Usuario</th>
+              <th>Estado</th>
+              <th>Tipo de Usuario</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios;">
+              <td>{{usuario.Name}}&nbsp;{{usuario.Lastname}}</td>
+              <td>{{usuario.Identification}}</td>
+              <td>{{usuario.Email}}</td>
+              <td>{{usuario.PhoneNumber}}</td>
+              <td>{{usuario.Nickname}}</td>
+              <td>{{usuario.UserState}}</td>
+              <td>{{usuario.IDUserType.UserType}}</td>
+            </tr>
+            <tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <div class="card shadow mb-4 col-4">
+      <app-usuario-form></app-usuario-form>
+    </div>
   </div>
 </div>
