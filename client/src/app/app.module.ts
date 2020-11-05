@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 import { UsuarioListComponent } from './components/usuario-list/usuario-list.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import {UsuariosService} from './services/usuarios.service'
 @NgModule({
@@ -19,7 +20,8 @@ import {UsuariosService} from './services/usuarios.service'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [
     UsuariosService
