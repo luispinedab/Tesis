@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr [routerLink]="['/usuarios/crud',usuario.IDUser]"  *ngFor="let usuario of usuarios;">
+          <tr [routerLink]="['/usuarios/crud',usuario.IDUser]" *ngFor="let usuario of usuarios;">
             <td>{{usuario.Name}}&nbsp;{{usuario.Lastname}}</td>
             <td>{{usuario.Identification}}</td>
             <td>{{usuario.Email}}</td>

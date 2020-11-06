@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios.service';
-
+import {Router,ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-usuario-list',
   templateUrl: './usuario-list.component.html',
@@ -9,7 +9,7 @@ import { UsuariosService } from '../../services/usuarios.service';
 
 export class UsuarioListComponent implements OnInit {
   usuarios: any = [];
-  constructor(private usuariosService:UsuariosService) { }
+  constructor(private usuariosService:UsuariosService,private router:Router) { }
 
   ngOnInit(){
     this.getUsers();

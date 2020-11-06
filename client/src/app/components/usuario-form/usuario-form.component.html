@@ -38,7 +38,7 @@
     </div>
     <div class="edit-form-bottom">
         <div class="button-left">
-            <button class="btn btn-info" (click)="saveNewUser()">
+            <button class="btn btn-info" (click)= "edit ? alert() : saveNewUser()">
                 <fa-icon [icon]="['fas', 'plus-circle']"></fa-icon>
             </button>
             <button class="btn btn-danger" (click)="deleteUser()">

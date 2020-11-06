@@ -4,6 +4,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import {User} from '../../models/Usuario';
 import {Router,ActivatedRoute} from '@angular/router';
 import {UsuariosService} from '../../services/usuarios.service';
+
 @Component({
   selector: 'app-usuario-form',
   templateUrl: './usuario-form.component.html',
@@ -23,11 +24,15 @@ export class UsuarioFormComponent implements OnInit {
    UserState:1,
    IDUserType:0
  };
+ edit:boolean = false;
   // ICONS
   constructor(library: FaIconLibrary,private usuariosService:UsuariosService, private router:Router,private activatedRoute:ActivatedRoute) {
     library.addIconPacks(fas);
   }
   ngOnInit(): void {
+    this.updatepage();
+  }
+  updatepage(){
     const params = this.activatedRoute.snapshot.params;
     if (params.id){
       this.usuariosService.getUsuario(params.id)
@@ -35,6 +40,7 @@ export class UsuarioFormComponent implements OnInit {
         res => {
           console.log(res);
           this.user=res;
+          this.edit=true;
         },
         err => console.error(err)
       )
@@ -66,14 +72,25 @@ export class UsuarioFormComponent implements OnInit {
   }
   deleteUser()
   {
-    this.usuariosService.deleteUsuario(this.user.IDUser)
-    .subscribe(
-      res=>{
-        console.log(res);
-        this.router.navigate(['/']);
-        this.router.navigate(['/usuarios']);
-      },
-      err=>console.error(err)
-    )
+    var txt;
+    var r = confirm("Presione aceptar si desea eleminar el registro");
+    if (r == true) {
+      this.usuariosService.deleteUsuario(this.user.IDUser)
+      .subscribe(
+        res=>{
+          console.log(res);
+          this.router.navigate(['/']);
+          this.router.navigate(['/usuarios']);
+        },
+        err=>console.error(err)
+      )
+    } else {
+      this.router.navigate(['/']);
+      this.router.navigate(['/usuarios']);
+    }
+  }
+  alert()
+  {
+    alert("No se puede agregar registro");
   }
 }
