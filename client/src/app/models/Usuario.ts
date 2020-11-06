@@ -5,7 +5,7 @@ export interface User{
     Identification?:number;
     Email?: string;
     PhoneNumber?: string;
-    User?: string;
+    Nickname?: string;
     Password?: string;
     UserState?: number;
     IDUserType?:number;

@@ -1,8 +1,12 @@
-import {Entity,Column,PrimaryColumn} from "typeorm";
+import {Entity,Column,PrimaryColumn,OneToMany} from "typeorm";
+import {User} from "./Usuario"
 @Entity()
 export class UserType{
     @PrimaryColumn()
     IDUserType:number;
     @Column()
     UserType:string;
+
+    @OneToMany(type => User, user => user.IDUserType) 
+    users: User[];
 }

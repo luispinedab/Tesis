@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = void 0;
+exports.deleteUser = exports.updateUser = exports.getUser = exports.createUser = exports.getUsers = void 0;
 var typeorm_1 = require("typeorm");
 var Usuario_1 = require("../entity/Usuario");
 exports.getUsers = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -50,26 +50,56 @@ exports.getUsers = function (req, res) { return __awaiter(void 0, void 0, void 0
         }
     });
 }); };
-/*export const createUser = async(req:Request,res:Response):Promise<Response>=>{
-     const newUser = getRepository(user).create(req.body);
-     const results = await getRepository(user).save(newUser);
-     console.log("Guardado",req.body);
-     return res.json(results);
-};
-export const getUser = async(req:Request,res:Response):Promise<Response>=>{
-    const results = await getRepository(user).findOne(req.params.id);
-    return res.json(results);
-};
-export const updateUser = async(req:Request,res:Response):Promise<Response>=>{
-    const usuario = await getRepository(user).findOne(req.params.id);
-    if (usuario){
-        getRepository(user).merge(usuario,req.body);
-       const results =  await getRepository(user).save(usuario);
-       return res.json(results);
-    }
-    return res.status(404).json({msg: "Not user found"});
-};
-export const deleteUser = async(req:Request,res:Response):Promise<Response>=>{
-    const results = await getRepository(user).delete(req.params.id);
-    return res.json(results);
-};*/ 
+exports.createUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var newUser, results;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                newUser = typeorm_1.getRepository(Usuario_1.User).create(req.body);
+                return [4 /*yield*/, typeorm_1.getRepository(Usuario_1.User).save(newUser)];
+            case 1:
+                results = _a.sent();
+                console.log("Guardado", req.body);
+                return [2 /*return*/, res.json(results)];
+        }
+    });
+}); };
+exports.getUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var results;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(Usuario_1.User).findOne(req.params.id)];
+            case 1:
+                results = _a.sent();
+                return [2 /*return*/, res.json(results)];
+        }
+    });
+}); };
+exports.updateUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, results;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(Usuario_1.User).findOne(req.params.id)];
+            case 1:
+                user = _a.sent();
+                if (!user) return [3 /*break*/, 3];
+                typeorm_1.getRepository(Usuario_1.User).merge(user, req.body);
+                return [4 /*yield*/, typeorm_1.getRepository(Usuario_1.User).save(user)];
+            case 2:
+                results = _a.sent();
+                return [2 /*return*/, res.json(results)];
+            case 3: return [2 /*return*/, res.status(404).json({ msg: "Not user found" })];
+        }
+    });
+}); };
+exports.deleteUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var results;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(Usuario_1.User).delete(req.params.id)];
+            case 1:
+                results = _a.sent();
+                return [2 /*return*/, res.json(results)];
+        }
+    });
+}); };

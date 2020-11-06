@@ -17,13 +17,13 @@ export class UsuariosService {
   getUsuario(id:string){
     return this.http.get(`${this.API_URI}/Usuarios/${id}`);
   }
-  deleteUsuario(id: string){
+  deleteUsuario(id: string|number){
     return this.http.delete(`${this.API_URI}/Usuarios/${id}`)
   }
   saveUsuario(usuario:User){
     return this.http.post(`${this.API_URI}/Usuarios`,usuario);
   }
-  updateUsuario(id: string,updatedUsuario: User): Observable<User>{
+  updateUsuario(id: string|number,updatedUsuario: User): Observable<User>{
     return this.http.put(`${this.API_URI}/Usuarios/${id}`,updatedUsuario);
   }
 }

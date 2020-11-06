@@ -1,5 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn,OneToOne, JoinColumn} from 'typeorm';
-import { type } from 'os';
+import {Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne} from 'typeorm';
 import { UserType } from './TipoUsuario';
 
 @Entity()
@@ -12,7 +11,7 @@ export class User {
     Lastname: string;
     @Column()
     Identification: number;
-    @OneToOne(type=>UserType)@JoinColumn()
+    @ManyToOne(type=>UserType,IDUserType=>IDUserType.UserType)
     IDUserType: UserType;
     @Column()
     Email: string;

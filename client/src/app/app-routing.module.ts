@@ -12,6 +12,10 @@ const routes: Routes = [
   {
     path: 'usuarios',
     component: UsuarioListComponent
+  },
+  {
+    path: 'usuarios/crud/:id',
+    component: UsuarioListComponent
   }
 ];
 

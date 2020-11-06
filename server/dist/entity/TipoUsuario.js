@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserType = void 0;
 var typeorm_1 = require("typeorm");
+var Usuario_1 = require("./Usuario");
 var UserType = /** @class */ (function () {
     function UserType() {
     }
@@ -22,6 +23,10 @@ var UserType = /** @class */ (function () {
         typeorm_1.Column(),
         __metadata("design:type", String)
     ], UserType.prototype, "UserType", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function (type) { return Usuario_1.User; }, function (user) { return user.IDUserType; }),
+        __metadata("design:type", Array)
+    ], UserType.prototype, "users", void 0);
     UserType = __decorate([
         typeorm_1.Entity()
     ], UserType);

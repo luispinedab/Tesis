@@ -32,8 +32,7 @@ var User = /** @class */ (function () {
         __metadata("design:type", Number)
     ], User.prototype, "Identification", void 0);
     __decorate([
-        typeorm_1.OneToOne(function (type) { return TipoUsuario_1.UserType; }),
-        typeorm_1.JoinColumn(),
+        typeorm_1.ManyToOne(function (type) { return TipoUsuario_1.UserType; }, function (IDUserType) { return IDUserType.UserType; }),
         __metadata("design:type", TipoUsuario_1.UserType)
     ], User.prototype, "IDUserType", void 0);
     __decorate([
