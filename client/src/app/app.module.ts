@@ -6,6 +6,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
@@ -20,10 +21,15 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import {UsersService}   from './services/users.service';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NavigationComponent, UserFormComponent, UserListComponent],
   imports: [
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -39,6 +45,9 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+  ],
+    providers: [
+    UsersService
   ],
   bootstrap: [AppComponent],
 })

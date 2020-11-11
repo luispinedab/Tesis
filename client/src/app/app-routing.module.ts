@@ -1,5 +1,7 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import {UserListComponent} from '../app/components/user-list/user-list.component';
+import {NavigationComponent} from '../app/components/navigation/navigation.component';
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -16,13 +18,26 @@ export const routes: Routes = [
       .then(m => m.PagesModule),
   },
   {
+    path: '',
+    redirectTo: 'administrar',
+    pathMatch: 'full'
+  },
+  {
+    path: 'administrar',
+    component:NavigationComponent,
+  },
+  {
+    path: 'administrar/usuarios',
+    component:UserListComponent,
+  },
+  {
+    path: 'administrar/usuarios/crud/:id',
+    component:UserListComponent, 
+  },
+  {
     path: 'auth',
     component: NbAuthComponent,
     children: [
-      {
-        path: '',
-        component: NbLoginComponent,
-      },
       {
         path: 'login',
         component: NbLoginComponent,
@@ -42,13 +57,10 @@ export const routes: Routes = [
       {
         path: 'reset-password',
         component: NbResetPasswordComponent,
-      },
+      }
     ],
   },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
 ];
-
 const config: ExtraOptions = {
   useHash: false,
 };
