@@ -12,10 +12,12 @@ import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 import {
   NbChatModule,
   NbDatepickerModule,
   NbDialogModule,
+  NbCardModule,
   NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
@@ -25,9 +27,10 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import {UsersService}   from './services/users.service';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
-  declarations: [AppComponent, NavigationComponent, UserFormComponent, UserListComponent],
+  declarations: [AppComponent, NavigationComponent, UserFormComponent, UserListComponent, TestComponent],
   imports: [
     FormsModule,
     BrowserModule,
@@ -40,6 +43,8 @@ import {UsersService}   from './services/users.service';
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
+    Ng2SmartTableModule,
+    NbCardModule,
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),

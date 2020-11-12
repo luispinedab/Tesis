@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../../models/User';
 import {UsersService} from '../../services/users.service';
 import {Router,ActivatedRoute} from '@angular/router';
-
 @Component({
   selector: 'ngx-user-form',
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
-
    user: User={
    Name:'',
    Lastname:'',
