@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from '../../services/users.service';
 import {SmartTableData} from '../../@core/data/smart-table';
-import {Router,ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-test',
@@ -59,7 +59,7 @@ export class TestComponent implements OnInit {
         valuePrepareFunction: (data) => {
         return data.UserType;
       },
-      },
+    },
     },
   };
   usuarios: any = [];

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { LocalDataSource } from 'ng2-smart-table';
+import {UsersService} from '../../../services/users.service';
+import {Router} from '@angular/router';
+
 
 import { SmartTableData } from '../../../@core/data/smart-table';
 
@@ -26,38 +28,59 @@ export class SmartTableComponent {
       confirmDelete: true,
     },
     columns: {
-      id: {
-        title: 'ID',
+      Name: {
+        title: 'Nombre',
+        type: 'string',
+      },
+      Lastname: {
+        title: 'Apellido',
+        type: 'string',
+      },
+      Identification: {
+        title: 'Identificación',
         type: 'number',
       },
-      firstName: {
-        title: 'First Name',
-        type: 'string',
-      },
-      lastName: {
-        title: 'Last Name',
-        type: 'string',
-      },
-      username: {
-        title: 'Username',
-        type: 'string',
-      },
-      email: {
+      Email: {
         title: 'E-mail',
         type: 'string',
       },
-      age: {
-        title: 'Age',
+      PhoneNumber: {
+        title: 'Celular',
         type: 'number',
       },
+      Nickname: {
+        title: 'NombredeUsuario',
+        type: 'string',
+      },
+      UserState: {
+        title: 'Estado',
+        type: 'number',
+      },
+      IDUserType: {
+        title: 'TipoUsuario',
+        type: 'string',
+        valuePrepareFunction: (data) => {
+        return data.UserType;
+      },
+    },
     },
   };
 
-  source: LocalDataSource = new LocalDataSource();
-
-  constructor(private service: SmartTableData) {
-    const data = this.service.getData();
-    this.source.load(data);
+  usuarios: any = [];
+  edit:boolean = false;
+  constructor(private service: SmartTableData, private usuariosService:UsersService, private router:Router) {
+  }
+  ngOnInit(): void {
+    this.getUsers();
+  }
+  getUsers(){
+    this.usuariosService.getUsuarios().subscribe(
+      res=>{
+        this.usuarios = res;
+        console.log(res);       
+      },
+      err =>console.error(err)
+    );
   }
 
   onDeleteConfirm(event): void {

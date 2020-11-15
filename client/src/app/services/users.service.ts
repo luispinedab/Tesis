@@ -9,7 +9,9 @@ import { Observable } from 'rxjs';
 export class UsersService {
     API_URI = 'http://localhost:3000';
   constructor(private http:HttpClient) { }
-
+  getTipoUsuarios(){
+    return this.http.get(`${this.API_URI}/TipoUsuarios`);
+  }
   getUsuarios(){
     return this.http.get(`${this.API_URI}/Usuarios`);
   }

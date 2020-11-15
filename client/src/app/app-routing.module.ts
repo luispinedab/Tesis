@@ -2,7 +2,6 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import {UserListComponent} from '../app/components/user-list/user-list.component';
 import {NavigationComponent} from '../app/components/navigation/navigation.component';
-import {TestComponent} from '../app/components/test/test.component';
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -22,10 +21,6 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'administrar',
     pathMatch: 'full'
-  },
-  {
-    path:'test',
-    component:TestComponent,
   },
   {
     path: 'administrar',

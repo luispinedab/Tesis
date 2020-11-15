@@ -213,6 +213,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    title: 'Administrar',
+    icon: 'grid-outline',
+    children: [
+      {
+        title: 'Administrar Usuarios',
+        link: '/pages/administrar/administrar-usuarios',
+      },
+      {
+        title: 'Tree Grid',
+        link: '/pages/tables/tree-grid',
+      },
+    ],
+  },
+  {
     title: 'Miscellaneous',
     icon: 'shuffle-2-outline',
     children: [
