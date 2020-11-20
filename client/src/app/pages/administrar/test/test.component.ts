@@ -1,6 +1,7 @@
-import { Component} from '@angular/core';
+import { Component, ɵclearResolutionOfComponentResourcesQueue} from '@angular/core';
 import {UsersService} from '../../../services/users.service';
 import {Router} from '@angular/router';
+
 
 
 
@@ -63,7 +64,7 @@ export class TestComponent{
           type: 'list',
           config:
           { 
-            list: [{value:1,title:'Activo'},{value:0,title:'Inactivo'}]
+            list: [{title:'Activo',value:1},{title:'Inactivo',value:0}]
           },  
         },
       },
@@ -91,14 +92,20 @@ usuarios: any = [];
   }
 
   ngOnInit(): void {
-    this.getUsers();
     this.getUsertype();
+    this.getUsers();
   }
   getUsers(){
     this.usuariosService.getUsuarios().subscribe(
       res=>{
         this.usuarios = res;
-        console.log(res);       
+        this.usuarios.forEach(function(elemento, indice, array) {
+            if(array[indice].UserState==1)
+              {array[indice].UserState="Activo"}
+              else if(array[indice].UserState==0)
+                {array[indice].UserState="Inactivo"}
+       })
+       console.log(this.usuarios)
       },
       err =>console.error(err)
     );
@@ -139,6 +146,7 @@ usuarios: any = [];
       this.usuariosService.saveUsuario(newregistry)
     .subscribe(
       res => {
+        this.getUsers();
         console.log(res);
       },
       err => console.error(err)
@@ -152,9 +160,15 @@ usuarios: any = [];
     if (window.confirm('Are you sure you want to save?')) {
       event.confirm.resolve(event.newData);
       var newrow=event.newData;
+      if(newrow.UserState=="Activo")
+        {newrow.UserState=1}
+      else if(newrow.UserState=="Inactivo")
+        {newrow.UserState=0}
+      console.log(newrow);
       this.usuariosService.updateUsuario(newrow.IDUser,newrow)
     .subscribe(
       res =>{
+        this.getUsers();
         console.log(res);
       },
       err => console.error(err)

@@ -214,15 +214,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Administrar',
-    icon: 'grid-outline',
+    icon: 'star',
     children: [
       {
         title: 'Administrar Usuarios',
         link: '/pages/administrar/administrar-usuarios',
-      },
-      {
-        title: 'Tree Grid',
-        link: '/pages/tables/tree-grid',
       },
     ],
   },
