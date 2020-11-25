@@ -57,7 +57,7 @@ export class SmartTableComponent {
         type: 'number',
       },
       IDUserType: {
-        title: 'TipoUsuario',
+        title: 'TipodeUsuario',
         type: 'string',
         valuePrepareFunction: (data) => {
         return data.UserType;
@@ -77,7 +77,7 @@ export class SmartTableComponent {
     this.usuariosService.getUsuarios().subscribe(
       res=>{
         this.usuarios = res;
-        console.log(res);       
+        console.log(res);    
       },
       err =>console.error(err)
     );

@@ -60,24 +60,38 @@ export class TestComponent{
       UserState: {
         title: 'Estado',
         editor:
-        {
+        {selectText: 'Select',
           type: 'list',
           config:
           { 
             list: [{title:'Activo',value:1},{title:'Inactivo',value:0}]
           },  
         },
+        filter: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: [{title:'Activo',value:'Activo'},{title:'Inactivo',value:'Inactivo'}]
+          },
+        },
+
       },
       IDUserType: {
         title: 'TipoUsuario',
-        type: 'list',
         editor:
-        {
+        {selectText: 'Select',
           type: 'list',
           config:
           { 
             list: []
           },  
+        },
+          filter: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: []
+          },
         },
         valuePrepareFunction: (data) => {
         return data.UserType;
@@ -85,7 +99,7 @@ export class TestComponent{
     },
     },
   };
- tipousuarios: any=[];
+tipousuarios: any=[];
 usuarios: any = [];
   edit:boolean = false;
   constructor(private service: SmartTableData, private usuariosService:UsersService, private router:Router) {
@@ -99,16 +113,17 @@ usuarios: any = [];
     this.usuariosService.getUsuarios().subscribe(
       res=>{
         this.usuarios = res;
+        console.log(this.usuarios);
         this.usuarios.forEach(function(elemento, indice, array) {
             if(array[indice].UserState==1)
               {array[indice].UserState="Activo"}
               else if(array[indice].UserState==0)
                 {array[indice].UserState="Inactivo"}
        })
-       console.log(this.usuarios)
       },
       err =>console.error(err)
     );
+    console.log(this.usuarios);
   }
   getUsertype(){
     this.usuariosService.getTipoUsuarios().subscribe(
@@ -116,8 +131,10 @@ usuarios: any = [];
         this.tipousuarios =data;
         for(let tu of this.tipousuarios){
           this.settings.columns.IDUserType.editor.config.list.push({value:tu.IDUserType,title:tu.UserType});
+          this.settings.columns.IDUserType.filter.config.list.push({value:tu,title:tu.UserType});
           this.settings = Object.assign({}, this.settings);
         }
+        console.log(this.settings.columns.IDUserType.filter);
       }
     )
   }
@@ -164,7 +181,6 @@ usuarios: any = [];
         {newrow.UserState=1}
       else if(newrow.UserState=="Inactivo")
         {newrow.UserState=0}
-      console.log(newrow);
       this.usuariosService.updateUsuario(newrow.IDUser,newrow)
     .subscribe(
       res =>{
