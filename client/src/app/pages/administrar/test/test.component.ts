@@ -74,7 +74,6 @@ export class TestComponent{
             list: [{title:'Activo',value:'Activo'},{title:'Inactivo',value:'Inactivo'}]
           },
         },
-
       },
       IDUserType: {
         title: 'TipoUsuario',
@@ -92,6 +91,15 @@ export class TestComponent{
             selectText: 'Select',
             list: []
           },
+        },
+        filterFunction(cell?: any, search?: string,): boolean {          
+         // if (cell >= search || search === '') {
+           if(cell.IDUserType==search)
+           {
+            return true;
+          } else {
+            return false;
+          } 
         },
         valuePrepareFunction: (data) => {
         return data.UserType;
@@ -131,7 +139,7 @@ usuarios: any = [];
         this.tipousuarios =data;
         for(let tu of this.tipousuarios){
           this.settings.columns.IDUserType.editor.config.list.push({value:tu.IDUserType,title:tu.UserType});
-          this.settings.columns.IDUserType.filter.config.list.push({value:tu,title:tu.UserType});
+          this.settings.columns.IDUserType.filter.config.list.push({value:tu.IDUserType,title:tu.UserType});
           this.settings = Object.assign({}, this.settings);
         }
         console.log(this.settings.columns.IDUserType.filter);

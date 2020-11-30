@@ -9,6 +9,7 @@ var cors_1 = __importDefault(require("cors"));
 var morgan_1 = __importDefault(require("morgan"));
 var user_routes_1 = __importDefault(require("./routes/user.routes"));
 var TipoUsuario_routes_1 = __importDefault(require("./routes/TipoUsuario.routes"));
+var grade_routes_1 = __importDefault(require("./routes/grade.routes"));
 var typeorm_1 = require("typeorm");
 var app = express_1.default();
 typeorm_1.createConnection();
@@ -17,6 +18,6 @@ app.use(cors_1.default());
 app.use(morgan_1.default('dev'));
 app.use(express_1.default.json());
 //routes
-app.use(user_routes_1.default, TipoUsuario_routes_1.default);
+app.use(user_routes_1.default, TipoUsuario_routes_1.default, grade_routes_1.default);
 app.listen(3000);
 console.log('Server on Port', 3000);

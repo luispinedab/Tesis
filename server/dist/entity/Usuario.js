@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 var typeorm_1 = require("typeorm");
 var TipoUsuario_1 = require("./TipoUsuario");
+var Curso_1 = require("./Curso");
 var User = /** @class */ (function () {
     function User() {
     }
@@ -32,7 +33,7 @@ var User = /** @class */ (function () {
         __metadata("design:type", Number)
     ], User.prototype, "Identification", void 0);
     __decorate([
-        typeorm_1.ManyToOne(function (type) { return TipoUsuario_1.UserType; }, function (IDUserType) { return IDUserType.UserType; }),
+        typeorm_1.ManyToOne(function (type) { return TipoUsuario_1.UserType; }, function (IDUserType) { return IDUserType.users; }),
         __metadata("design:type", TipoUsuario_1.UserType)
     ], User.prototype, "IDUserType", void 0);
     __decorate([
@@ -55,6 +56,10 @@ var User = /** @class */ (function () {
         typeorm_1.Column(),
         __metadata("design:type", Number)
     ], User.prototype, "UserState", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function (type) { return Curso_1.Grade; }, function (grade) { return grade.IDDirector; }),
+        __metadata("design:type", Array)
+    ], User.prototype, "grades", void 0);
     User = __decorate([
         typeorm_1.Entity()
     ], User);

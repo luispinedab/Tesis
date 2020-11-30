@@ -1,5 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne} from 'typeorm';
 import { UserType } from './TipoUsuario';
+import {Grade} from './Curso';
 
 @Entity()
 export class User {
@@ -11,7 +12,7 @@ export class User {
     Lastname: string;
     @Column()
     Identification: number;
-    @ManyToOne(type=>UserType,IDUserType=>IDUserType.UserType)
+    @ManyToOne(type=>UserType,IDUserType=>IDUserType.users)
     IDUserType: UserType;
     @Column()
     Email: string;
@@ -23,4 +24,7 @@ export class User {
     Password: string;
     @Column()
     UserState: number;
+
+    @OneToMany(type => Grade, grade => grade.IDDirector) 
+    grades: Grade[];
 }
