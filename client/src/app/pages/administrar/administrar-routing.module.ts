@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdministrarComponent  } from './administrar.component';
 import { TestComponent } from './test/test.component';
+import {GradesComponent } from './grades/grades.component';
 
 
 const routes: Routes = [{
@@ -12,6 +13,10 @@ const routes: Routes = [{
     {
       path: 'administrar-usuarios',
       component: TestComponent,
+    },
+    {
+      path: 'administrar-cursos',
+      component: GradesComponent,
     },
   ],
 }];
@@ -25,4 +30,5 @@ export class AdministrarRoutingModule { }
 export const routedComponents = [
   AdministrarComponent,
   TestComponent,
+  GradesComponent
 ];

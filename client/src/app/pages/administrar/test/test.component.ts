@@ -93,7 +93,6 @@ export class TestComponent{
           },
         },
         filterFunction(cell?: any, search?: string,): boolean {          
-         // if (cell >= search || search === '') {
            if(cell.IDUserType==search)
            {
             return true;

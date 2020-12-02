@@ -220,6 +220,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Administrar Usuarios',
         link: '/pages/administrar/administrar-usuarios',
       },
+      {
+        title: 'Administrar Cursos',
+        link: '/pages/administrar/administrar-cursos',
+      },
     ],
   },
   {

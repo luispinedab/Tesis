@@ -4,6 +4,7 @@ import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule } from '@ne
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
 import { AdministrarRoutingModule, routedComponents } from './administrar-routing.module';
+import { GradesComponent } from './grades/grades.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { AdministrarRoutingModule, routedComponents } from './administrar-routin
   ],
   declarations: [
     ...routedComponents,
+    GradesComponent,
   ],
 })
 export class AdministrarModule { }

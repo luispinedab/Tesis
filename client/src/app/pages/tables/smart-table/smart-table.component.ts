@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {UsersService} from '../../../services/users.service';
+import {GradesService} from '../../../services/grades.service';
 import {Router} from '@angular/router';
 
 
@@ -28,61 +28,43 @@ export class SmartTableComponent {
       confirmDelete: true,
     },
     columns: {
-      Name: {
-        title: 'Nombre',
+      Year: {
+        title: 'Año',
+        type: 'date',
+      },
+      LevelGrade: {
+        title: 'Nivel',
         type: 'string',
       },
-      Lastname: {
-        title: 'Apellido',
+      NameGrade: {
+        title: 'Nombre del curso',
         type: 'string',
       },
-      Identification: {
-        title: 'Identificación',
-        type: 'number',
-      },
-      Email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      PhoneNumber: {
-        title: 'Celular',
-        type: 'number',
-      },
-      Nickname: {
-        title: 'NombredeUsuario',
-        type: 'string',
-      },
-      UserState: {
-        title: 'Estado',
-        type: 'number',
-      },
-      IDUserType: {
-        title: 'TipodeUsuario',
+      IDDirector: {
+        title: 'Director de Curso',
         type: 'string',
         valuePrepareFunction: (data) => {
-        return data.UserType;
+        return data.Name;
       },
     },
     },
   };
 
-  usuarios: any = [];
-  edit:boolean = false;
-  constructor(private service: SmartTableData, private usuariosService:UsersService, private router:Router) {
+  grades: any = [];
+  constructor(private service: SmartTableData, private gradesService:GradesService, private router:Router) {
   }
   ngOnInit(): void {
-    this.getUsers();
+    this.getGrades();
   }
-  getUsers(){
-    this.usuariosService.getUsuarios().subscribe(
+  getGrades(){
+    this.gradesService.getCursos().subscribe(
       res=>{
-        this.usuarios = res;
+        this.grades = res;
         console.log(res);    
       },
       err =>console.error(err)
     );
   }
-
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       event.confirm.resolve();
