@@ -13,6 +13,7 @@ exports.User = void 0;
 var typeorm_1 = require("typeorm");
 var TipoUsuario_1 = require("./TipoUsuario");
 var Curso_1 = require("./Curso");
+var Asignatura_1 = require("./Asignatura");
 var User = /** @class */ (function () {
     function User() {
     }
@@ -60,6 +61,10 @@ var User = /** @class */ (function () {
         typeorm_1.OneToMany(function (type) { return Curso_1.Grade; }, function (grade) { return grade.IDDirector; }),
         __metadata("design:type", Array)
     ], User.prototype, "grades", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function (type) { return Asignatura_1.Subject; }, function (subject) { return subject.IDTeacher; }),
+        __metadata("design:type", Array)
+    ], User.prototype, "subjects", void 0);
     User = __decorate([
         typeorm_1.Entity()
     ], User);

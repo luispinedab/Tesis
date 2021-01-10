@@ -5,6 +5,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
 import { AdministrarRoutingModule, routedComponents } from './administrar-routing.module';
 import { GradesComponent } from './grades/grades.component';
+import { SubjectsComponent } from './subjects/subjects.component';
+import { AchievementsComponent } from './achievements/achievements.component';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { GradesComponent } from './grades/grades.component';
   declarations: [
     ...routedComponents,
     GradesComponent,
+    SubjectsComponent,
+    AchievementsComponent,
   ],
 })
 export class AdministrarModule { }

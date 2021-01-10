@@ -3,7 +3,7 @@ import {getRepository}from 'typeorm';
 import {Grade}from '../entity/Curso';
 
 export const getGrades = async(req:Request,res:Response):Promise<Response>=>{
-    const results = await getRepository(Grade).find({relations:['IDDirector']});
+    const results = await getRepository(Grade).find({relations:['IDDirector','IDLevelGrade'],});
     return res.json(results);
 };
 export const createGrade = async(req:Request,res:Response):Promise<Response>=>{

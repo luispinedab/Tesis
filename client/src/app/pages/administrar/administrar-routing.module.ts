@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdministrarComponent  } from './administrar.component';
 import { TestComponent } from './test/test.component';
 import {GradesComponent } from './grades/grades.component';
+import {SubjectsComponent} from './subjects/subjects.component';
+import {AchievementsComponent} from './achievements/achievements.component';
 
 
 const routes: Routes = [{
@@ -18,6 +20,14 @@ const routes: Routes = [{
       path: 'administrar-cursos',
       component: GradesComponent,
     },
+    {
+      path: 'administrar-asignaturas',
+      component: SubjectsComponent,
+    },
+    {
+      path: 'administrar-logros',
+      component: AchievementsComponent,
+    }
   ],
 }];
 
@@ -30,5 +40,7 @@ export class AdministrarRoutingModule { }
 export const routedComponents = [
   AdministrarComponent,
   TestComponent,
-  GradesComponent
+  GradesComponent,
+  SubjectsComponent,
+  AchievementsComponent
 ];

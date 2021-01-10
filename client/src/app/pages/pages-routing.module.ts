@@ -68,11 +68,6 @@ const routes: Routes = [{
       .then(m => m.AdministrarModule),
     },
     {
-      path: 'miscellaneous',
-      loadChildren: () => import('./miscellaneous/miscellaneous.module')
-        .then(m => m.MiscellaneousModule),
-    },
-    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',

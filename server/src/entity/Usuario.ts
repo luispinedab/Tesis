@@ -1,7 +1,7 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne} from 'typeorm';
 import { UserType } from './TipoUsuario';
 import {Grade} from './Curso';
-
+import {Subject} from './Asignatura';
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
@@ -24,7 +24,8 @@ export class User {
     Password: string;
     @Column()
     UserState: number;
-
     @OneToMany(type => Grade, grade => grade.IDDirector) 
     grades: Grade[];
+    @OneToMany(type => Subject, subject => subject.IDTeacher) 
+    subjects: Subject[];
 }

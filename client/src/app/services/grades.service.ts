@@ -10,6 +10,9 @@ export class GradesService {
   API_URI = 'http://localhost:3000';
   constructor(private http:HttpClient) { }
 
+  getNivelCursos(){
+    return this.http.get(`${this.API_URI}/NivelCursos`);
+  }
   getCursos(){
     return this.http.get(`${this.API_URI}/Cursos`);
   }
