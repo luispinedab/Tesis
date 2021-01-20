@@ -10,6 +10,7 @@ import LevelGradeRoutes from './routes/levelgrade.routes';
 import NameSubjectRoutes from './routes/namesubject.routes';
 import SubjectAreaRoutes from './routes/subjectarea.routes';
 import SubjectRoutes from './routes/subject.routes';
+import ViewAsignaturaRoutes from './routes/viewsubject.routes';
 import AchiecementRoutes from './routes/achievement.routes';
 import {createConnection} from 'typeorm';
 const app = express();
@@ -21,7 +22,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 //routes
-app.use(UserRoutes,TipoUsuarioRoutes,GradeRoutes,LevelGradeRoutes,NameSubjectRoutes,SubjectAreaRoutes,SubjectRoutes,AchiecementRoutes);
+app.use(UserRoutes,TipoUsuarioRoutes,GradeRoutes,LevelGradeRoutes,NameSubjectRoutes,SubjectAreaRoutes,SubjectRoutes,AchiecementRoutes,ViewAsignaturaRoutes);
 
 
 app.listen(3000);

@@ -37,14 +37,14 @@ export class SubjectsComponent implements OnInit {
           type: 'list',
           config:
           { 
-            list: [{title:'2020',value:2020},{title:'2021',value:2021},{title:'2022',value:2022}]
+            list: [{title:2020,value:2020},{title:2021,value:2021},{title:2020,value:2022}]
           },  
         },
         filter: {
           type: 'list',
           config: {
             selectText: 'Select',
-            list: [{title:'2020',value:2020},{title:'2021',value:2021},{title:'2022',value:2022}]
+            list: [{title:2020,value:2020},{title:2021,value:2021},{title:2022,value:2022}]
           },
         },
       },
@@ -52,10 +52,10 @@ export class SubjectsComponent implements OnInit {
         
         title: 'Curso',
         editor:
-        {selectText: 'Select',
+        {
           type: 'list',
           config:
-          { 
+          { selectText: 'Select',
             list: []
           },  
         },
@@ -66,7 +66,7 @@ export class SubjectsComponent implements OnInit {
             list: []
           },
         },
-        filterFunction(cell?: any, search?: string,): boolean {          
+        filterFunction(cell?: any, search?: string,): boolean {      
           if(cell.IDGrade==search)
           {
            return true;
@@ -81,10 +81,10 @@ export class SubjectsComponent implements OnInit {
       'IDNameSubject.IDArea': {
         title: 'Area',
         editor:
-        {selectText: 'Select',
-          type: 'list',
+        {
+        type: 'list',
           config:
-          { 
+          { selectText: 'Select',
             list: []
           },  
         },
@@ -95,17 +95,25 @@ export class SubjectsComponent implements OnInit {
             list: []
           },
         },
-        filterFunction(cell?: any, search?: string,): boolean {          
-          if(cell==search)
+        filterFunction(cell?: any, search?: any,): boolean {         
+          if( search ==cell)
           {
+           console.log("hola");
            return true;
          } else {
-          console.log(cell.IDNameSubject)
+           console.log(cell);
+           console.log(search);
            return false;
          } 
        },
-        valuePrepareFunction: (data) => { 
-          return data.IDNameSubject}
+        valuePrepareFunction: (cell,row) => {
+          try {
+            return row.IDNameSubject.IDArea.Area 
+          } catch (error) {
+            console.log("chao");
+            return "pepito";
+          }
+         }
         
       },
       IDNameSubject:{
@@ -126,10 +134,13 @@ export class SubjectsComponent implements OnInit {
           },
         },
         filterFunction(cell?: any, search?: string,): boolean {          
-          if(cell.IDNameSubject==search)
+          if(cell.namesubject==search)
           {
+            
            return true;
          } else {
+           console.log("cell:"+cell.namesubject)
+           console.log("search:"+search)
            return false;
          } 
        },
@@ -138,9 +149,6 @@ export class SubjectsComponent implements OnInit {
       },
       },
       IDTeacher:{
-        /*title: 'Docente',
-        type:'string',
-        */
         title: 'Docente',
         editor:
         {selectText: 'Select',
@@ -170,8 +178,10 @@ export class SubjectsComponent implements OnInit {
       },
 
       },
+     
     }
   }
+  Area: any=[];
   areas:any=[];
   subjects:any=[];
   usuarios:any=[];
@@ -192,10 +202,6 @@ export class SubjectsComponent implements OnInit {
       res=>{
       this.subjects = res;
       console.log(this.subjects);
-      /*this.subjects.forEach(function(elemento, indice, array) {
-        array[indice].IDSubject.IDSubject=array[indice].IDSubject.IDNameSubject.namesubject;
-        console.log(array[indice].IDSubject.IDSubject);
- })*/
       },
       err =>console.error(err)
       );
@@ -215,6 +221,7 @@ export class SubjectsComponent implements OnInit {
       )
   }
   getGrades(){
+    
     this.subjectsService.getCursos().subscribe(
       res=>{
         this.cursos =res;
@@ -235,8 +242,9 @@ export class SubjectsComponent implements OnInit {
       this.settings.columns['IDNameSubject.IDArea'].editor.config.list.push({value:u.IDArea,title:u.Area});
       this.settings.columns['IDNameSubject.IDArea'].filter.config.list.push({value:u.IDArea,title:u.Area});
       this.settings = Object.assign({}, this.settings);
-      
-    }  
+    } 
+    console.log(this.settings.columns['IDNameSubject.IDArea'].editor.config.list);
+    console.log(this.settings.columns['IDNameSubject.IDArea'].filter.config.list);
     }
     );
   }
@@ -246,7 +254,7 @@ export class SubjectsComponent implements OnInit {
         this.nombreasignaturas =res;
     for(let u of this.nombreasignaturas){
       this.settings.columns.IDNameSubject.editor.config.list.push({value:u.IDNameSubject,title:u.namesubject});
-      this.settings.columns.IDNameSubject.filter.config.list.push({value:u.IDNameSubject,title:u.namesubject});
+      this.settings.columns.IDNameSubject.filter.config.list.push({value:u.namesubject,title:u.namesubject});
       this.settings = Object.assign({}, this.settings);
       
     }  
@@ -287,9 +295,10 @@ export class SubjectsComponent implements OnInit {
     }
   } 
   onSaveConfirm(event):void {
-    if (window.confirm('Are you sure you want to save?')) {
+    try {if (window.confirm('Are you sure you want to save?')) {
       event.confirm.resolve(event.newData);
       var newrow=event.newData;
+      console.log(newrow);
       this.subjectsService.updateAsignaturas(newrow.IDSubject,newrow)
     .subscribe(
       res =>{
@@ -301,5 +310,10 @@ export class SubjectsComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
+      
+    } catch (error) {
+      console.log("holamundo")
+    }
+    
   }
 }

@@ -5,6 +5,7 @@ import { AdministrarComponent  } from './administrar.component';
 import { TestComponent } from './test/test.component';
 import {GradesComponent } from './grades/grades.component';
 import {SubjectsComponent} from './subjects/subjects.component';
+import {ArealistRowRenderComponent} from './arealist-row-render/arealist-row-render.component';
 import {AchievementsComponent} from './achievements/achievements.component';
 
 
@@ -25,6 +26,10 @@ const routes: Routes = [{
       component: SubjectsComponent,
     },
     {
+      path: 'administrar-asignaturas2',
+      component: ArealistRowRenderComponent,
+    },
+    {
       path: 'administrar-logros',
       component: AchievementsComponent,
     }
@@ -42,5 +47,6 @@ export const routedComponents = [
   TestComponent,
   GradesComponent,
   SubjectsComponent,
+  ArealistRowRenderComponent,
   AchievementsComponent
 ];

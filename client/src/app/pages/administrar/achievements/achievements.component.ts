@@ -94,6 +94,7 @@ export class AchievementsComponent implements OnInit {
   }
   achievements:any=[];
   subjects:any=[];
+  subjects1:any=[];
   levelgrades:any=[];
   constructor(private service: SmartTableData, private achievementsService:AchievementsService,private router:Router) { }
 
@@ -109,23 +110,30 @@ export class AchievementsComponent implements OnInit {
       this.achievements = res;
       this.achievements.forEach(function(elemento, indice, array) {
           array[indice].IDSubject.IDSubject=array[indice].IDSubject.IDNameSubject.namesubject;
-          console.log(array[indice].IDSubject.IDSubject);
+          //console.log(array[indice].IDSubject.IDSubject);
    })
       },
       err =>console.error(err)
       );
-      console.log(this.achievements);
+      //console.log(this.achievements);
   }
   getAsignaturas(){
     this.achievementsService.getAsignaturas().subscribe(
       res=>{
         this.subjects =res;
     for(let u of this.subjects){
-      this.settings.columns.IDSubject.editor.config.list.push({value:u.IDSubject,title:u.IDNameSubject.namesubject});
-      this.settings.columns.IDSubject.filter.config.list.push({value:u.IDSubject,title:u.IDNameSubject.namesubject});
-      this.settings = Object.assign({}, this.settings);
       
-    }  
+      if(this.subjects1.includes(u.IDNameSubject.namesubject)==false)
+      {
+        this.settings.columns.IDSubject.editor.config.list.push({value:u.IDSubject,title:u.IDNameSubject.namesubject});
+        this.settings.columns.IDSubject.filter.config.list.push({value:u.IDSubject,title:u.IDNameSubject.namesubject});
+        this.settings = Object.assign({}, this.settings);
+      }
+      this.subjects1.push(u.IDNameSubject.namesubject);
+      
+      
+      
+    }
     }
     );
   }
