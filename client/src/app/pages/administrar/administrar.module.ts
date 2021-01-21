@@ -7,7 +7,7 @@ import { AdministrarRoutingModule, routedComponents } from './administrar-routin
 import { GradesComponent } from './grades/grades.component';
 import { SubjectsComponent } from './subjects/subjects.component';
 import { AchievementsComponent } from './achievements/achievements.component';
-import { ArealistRowRenderComponent } from './arealist-row-render/arealist-row-render.component';
+
 
 
 @NgModule({
@@ -26,7 +26,6 @@ import { ArealistRowRenderComponent } from './arealist-row-render/arealist-row-r
     GradesComponent,
     SubjectsComponent,
     AchievementsComponent,
-    ArealistRowRenderComponent,
   ],
 })
 export class AdministrarModule { }

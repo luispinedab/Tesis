@@ -48,6 +48,11 @@ const routes: Routes = [{
       .then(m => m.AdministrarModule),
     },
     {
+      path: 'admision',
+      loadChildren: () => import('./admision/admision.module')
+      .then(m => m.AdmisionModule),
+    },
+    {
       path: '',
       redirectTo: 'administrar/administrar-usuarios',
       pathMatch: 'full',

@@ -162,12 +162,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/administrar/administrar-asignaturas',
       },
       {
-        title: 'Administrar Asignaturas2',
-        link: '/pages/administrar/administrar-asignaturas2',
-      },
-      {
         title: 'Administrar Logros',
         link: '/pages/administrar/administrar-logros',
+      },
+    ],
+  },
+  {
+    title: 'Admisión',
+    icon: 'layout-outline',
+    children: [
+      {
+        title: 'Enviar Formulario',
+        link: '/pages/admision/admision-formulario',
       },
     ],
   },

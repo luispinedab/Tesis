@@ -5,6 +5,7 @@ import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
+
 @NgModule({
   imports: [
     Ng2SmartTableModule,

@@ -1,5 +1,5 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import {UserListComponent} from '../app/components/user-list/user-list.component';
 import {NavigationComponent} from '../app/components/navigation/navigation.component';
 import {
@@ -10,6 +10,8 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
+import { AdmisionComponent } from './pages/admision/admision.component';
+import { FormularioComponent } from './pages/admision/formulario/formulario.component';
 
 export const routes: Routes = [
   {
@@ -59,6 +61,15 @@ export const routes: Routes = [
         component: NbResetPasswordComponent,
       }
     ],
+  },
+  {
+    path: 'admision',
+    component: AdmisionComponent,
+    children: [
+      { path: 'formulario',
+      component: FormularioComponent,
+    }
+    ],   
   },
 ];
 const config: ExtraOptions = {

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArealistRowRenderComponent } from './arealist-row-render.component';
+import { FormularioComponent } from './formulario.component';
 
-describe('ArealistRowRenderComponent', () => {
-  let component: ArealistRowRenderComponent;
-  let fixture: ComponentFixture<ArealistRowRenderComponent>;
+describe('FormularioComponent', () => {
+  let component: FormularioComponent;
+  let fixture: ComponentFixture<FormularioComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArealistRowRenderComponent ]
+      declarations: [ FormularioComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArealistRowRenderComponent);
+    fixture = TestBed.createComponent(FormularioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

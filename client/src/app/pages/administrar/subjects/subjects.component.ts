@@ -101,8 +101,8 @@ export class SubjectsComponent implements OnInit {
            console.log("hola");
            return true;
          } else {
+           
            console.log(cell);
-           console.log(search);
            return false;
          } 
        },

@@ -75,10 +75,11 @@ export class AchievementsComponent implements OnInit {
           },
         },
         filterFunction(cell?: any, search?: string,): boolean {          
-          if(cell.IDSubject==cell[search])
+          if(cell.IDSubject==search)
           {
            return true;
          } else {
+           console.log(search);
            return false;
          } 
        },
@@ -108,6 +109,7 @@ export class AchievementsComponent implements OnInit {
     this.achievementsService.getLogros().subscribe( 
       res=>{
       this.achievements = res;
+      console.log(this.achievements);
       this.achievements.forEach(function(elemento, indice, array) {
           array[indice].IDSubject.IDSubject=array[indice].IDSubject.IDNameSubject.namesubject;
           //console.log(array[indice].IDSubject.IDSubject);
@@ -115,7 +117,7 @@ export class AchievementsComponent implements OnInit {
       },
       err =>console.error(err)
       );
-      //console.log(this.achievements);
+      console.log(this.achievements);
   }
   getAsignaturas(){
     this.achievementsService.getAsignaturas().subscribe(
@@ -126,13 +128,10 @@ export class AchievementsComponent implements OnInit {
       if(this.subjects1.includes(u.IDNameSubject.namesubject)==false)
       {
         this.settings.columns.IDSubject.editor.config.list.push({value:u.IDSubject,title:u.IDNameSubject.namesubject});
-        this.settings.columns.IDSubject.filter.config.list.push({value:u.IDSubject,title:u.IDNameSubject.namesubject});
+        this.settings.columns.IDSubject.filter.config.list.push({value:u.IDNameSubject.namesubject,title:u.IDNameSubject.namesubject});
         this.settings = Object.assign({}, this.settings);
       }
-      this.subjects1.push(u.IDNameSubject.namesubject);
-      
-      
-      
+      this.subjects1.push(u.IDNameSubject.namesubject);    
     }
     }
     );
@@ -187,6 +186,8 @@ export class AchievementsComponent implements OnInit {
     if (window.confirm('Are you sure you want to save?')) {
       event.confirm.resolve(event.newData);
       var newrow=event.newData;
+      console.log(newrow);
+      console.log(this.subjects1);
       this.achievementsService.updateLogros(newrow.IDAchievement,newrow)
     .subscribe(
       res =>{
