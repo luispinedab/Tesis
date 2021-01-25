@@ -9,12 +9,15 @@ import {SmartTableData} from '../../../@core/data/smart-table';
   styleUrls: ['./subjects.component.scss']
 })
 export class SubjectsComponent implements OnInit {
+     searchArea:any="";
+     searchMateria:any="";
   settings ={
     add: {
-      addButtonContent: '<i class="nb-plus"></i>',
+      addButtonContent:    '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
       confirmCreate: true,
+      click:true,
     },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
@@ -37,14 +40,14 @@ export class SubjectsComponent implements OnInit {
           type: 'list',
           config:
           { 
-            list: [{title:2020,value:2020},{title:2021,value:2021},{title:2020,value:2022}]
+            list: []
           },  
         },
         filter: {
           type: 'list',
           config: {
             selectText: 'Select',
-            list: [{title:2020,value:2020},{title:2021,value:2021},{title:2022,value:2022}]
+            list: []
           },
         },
       },
@@ -95,25 +98,26 @@ export class SubjectsComponent implements OnInit {
             list: []
           },
         },
-        filterFunction(cell?: any, search?: any,): boolean {         
-          if( search ==cell)
-          {
-           console.log("hola");
-           return true;
-         } else {
-           
-           console.log(cell);
-           return false;
-         } 
-       },
+      
         valuePrepareFunction: (cell,row) => {
+       
           try {
             return row.IDNameSubject.IDArea.Area 
           } catch (error) {
-            console.log("chao");
             return "pepito";
           }
-         }
+         },
+         filterFunction: (cell,search) => {  
+          console.log("search:"+search); 
+          this.searchArea=search;
+          if( search ==cell)
+          {
+           return true;
+         } else {  
+           
+           return false;
+         } 
+       },
         
       },
       IDNameSubject:{
@@ -133,17 +137,18 @@ export class SubjectsComponent implements OnInit {
             list: []
           },
         },
-        filterFunction(cell?: any, search?: string,): boolean {          
+        filterFunction:(cell,search)=>{  
+          console.log("cell:"+cell.namesubject); 
+          this.searchMateria=search;    
           if(cell.namesubject==search)
           {
             
            return true;
          } else {
-           console.log("cell:"+cell.namesubject)
-           console.log("search:"+search)
            return false;
          } 
        },
+       
         valuePrepareFunction: (data) => {
         return data.namesubject;
       },
@@ -165,7 +170,7 @@ export class SubjectsComponent implements OnInit {
             list: []
           },
         },
-        filterFunction(cell?: any, search?: string,): boolean {          
+        filterFunction(cell?: any, search?: string): boolean {          
           if(cell.IDUser==search)
           {
            return true;
@@ -181,15 +186,19 @@ export class SubjectsComponent implements OnInit {
      
     }
   }
+   a;
   Area: any=[];
   areas:any=[];
   subjects:any=[];
   usuarios:any=[];
   cursos:any=[];
   nombreasignaturas:any=[];
+  year: any=[2020,2021,2022]; 
   constructor(private service: SmartTableData, private subjectsService:SubjectsService,private router:Router) { }
 
   ngOnInit(): void {
+    
+    this.getYears();
     this.getAreas();
     this.getNameSubjects();
     this.getGrades();
@@ -201,10 +210,15 @@ export class SubjectsComponent implements OnInit {
     this.subjectsService.getAsignaturas().subscribe( 
       res=>{
       this.subjects = res;
-      console.log(this.subjects);
       },
       err =>console.error(err)
       );
+  }
+  getYears(){
+    for(let u of this.year){
+      this.settings.columns.Year.filter.config.list.push({value:u,title:u});
+      this.settings.columns.Year.editor.config.list.push({value:u,title:u});
+    }
   }
   getUsers(){
     this.subjectsService.getUsuarios().subscribe( 
@@ -243,8 +257,6 @@ export class SubjectsComponent implements OnInit {
       this.settings.columns['IDNameSubject.IDArea'].filter.config.list.push({value:u.IDArea,title:u.Area});
       this.settings = Object.assign({}, this.settings);
     } 
-    console.log(this.settings.columns['IDNameSubject.IDArea'].editor.config.list);
-    console.log(this.settings.columns['IDNameSubject.IDArea'].filter.config.list);
     }
     );
   }
@@ -278,6 +290,7 @@ export class SubjectsComponent implements OnInit {
     }
   }
   onCreateConfirm(event):void { 
+  
     if (window.confirm('Are you sure you want to create?')) {
       event.confirm.resolve(event.newData);
        var newregistry = event.newData;
@@ -294,6 +307,375 @@ export class SubjectsComponent implements OnInit {
       event.confirm.reject();
     }
   } 
+  hola():void{
+    
+    switch (this.searchArea) {
+      case '1':
+        var opcion: any=[ {value:'Biología',title:'Biología '},{value:'Ciencias Naturales',title:'Ciencias Naturales '},{value: 'Física', title: 'Física '},{value: 'Química', title: 'Química '}]; 
+        var encuentra = false;
+        
+       
+        for(var i =0; i < opcion.length;i++){
+            encuentra = false;
+            for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+                if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                    encuentra = true;
+                    break;
+                }
+            }
+            if(!encuentra){
+              console.log("los arreglos no son iguales");
+              this.settings.columns.IDNameSubject.filter.config.list=opcion;
+              this.settings=Object.assign({},this.settings); 
+              break;
+            }
+        }
+        if(encuentra){
+            console.log("si son iguales");
+              
+        }
+        break;
+      case '2':
+        var opcion: any=[{value: "Ciencias Políticas y Económicas", title: "Ciencias Políticas y Económicas "},{value: "Filosofía", title: "Filosofía "},{value: "Sociales", title: "Sociales "}];
+        var encuentra = false;
+        for(var i =0; i < opcion.length;i++){
+            encuentra = false;
+            for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+                if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                    encuentra = true;
+                    break;
+                }
+            }
+            if(!encuentra){
+              console.log("los arreglos no son iguales");
+              this.settings.columns.IDNameSubject.filter.config.list=opcion;
+              this.settings=Object.assign({},this.settings);
+              break;
+            }
+        }
+        if(encuentra){
+            console.log("si son iguales");
+        }
+
+        break;
+    case '3': 
+      var opcion: any=[{value: "Pre Matemáticas", title: "Pre Matemáticas "},{value: "Pre Sistemas", title: "Pre Sistemas "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '4': 
+      var opcion: any=[{value: "Pre Español", title: "Pre Español "},{value: "Pre Inglés", title: "Pre Inglés "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '5': 
+      var opcion: any=[{value: "Expresión Corporal", title: "Expresión Corporal "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '6': 
+      var opcion: any=[{value: "Pre Ética y Valores", title: "Pre Ética y Valores "},{value: "Pre Religión", title: "Pre Religión "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '7': 
+      var opcion: any=[{value: "Pre Artes", title: "Pre Artes "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '8': 
+      var opcion: any=[{value: "Pre Ciencias", title: "Pre Ciencias "},{value: "Pre Sociales", title: "Pre Sociales "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '9': 
+      var opcion: any=[{value: "Artes", title: "Artes "},{value: "Danzas", title: "Danzas "},{value: "Música", title: "Música "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '10': 
+      var opcion: any=[{value: "Ética y Valores", title: "Ética y Valores "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '11': 
+      var opcion: any=[{value: "Educación Física", title: "Educación Física "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '12': 
+      var opcion: any=[{value: "Religión", title: "Religión "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '13': 
+      var opcion: any=[{value: "Español y Literatura", title: "Español y Literatura "},{value: "Francés", title: "Francés "},{value: "Inglés", title: "Inglés "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '14': 
+      var opcion: any=[{value: "Álgebra", title: "Álgebra "},{value: "Aritmética", title: "Aritmética "},{value: "Cálculo", title: "Cálculo "},{value: "Matemáticas", title: "Matemáticas "},{value: "Trigonometría", title: "Trigonometría "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '15': 
+      var opcion: any=[{value: "Psicología", title: "Psicología "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      case '16': 
+      var opcion: any=[{value: "Tecnología e Informática", title: "Tecnología e Informática "}];
+      var encuentra = false;
+      for(var i =0; i < opcion.length;i++){
+          encuentra = false;
+          for(var j =0; j < this.settings.columns.IDNameSubject.filter.config.list.length;j++){
+              if(opcion[i].title == this.settings.columns.IDNameSubject.filter.config.list[j].title){
+                  encuentra = true;
+                  break;
+              }
+          }
+          if(!encuentra){
+            console.log("los arreglos no son iguales");
+            this.settings.columns.IDNameSubject.filter.config.list=opcion;
+            this.settings=Object.assign({},this.settings);
+            break;
+          }
+      }
+      if(encuentra){
+          console.log("si son iguales");
+      }
+      break;
+      default:
+        break;
+    break;
+    
+ }
+ 
+  }
+  hola1(event):void {
+      console.log("Row:",event);
+  }
   onSaveConfirm(event):void {
     try {if (window.confirm('Are you sure you want to save?')) {
       event.confirm.resolve(event.newData);
