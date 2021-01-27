@@ -1,1 +1,153 @@
-<p>formulario works!</p>
+<div class="container">
+    <div class="row">
+        <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+            <nb-card-body>
+                <nb-stepper orientation="horizontal">
+                    <nb-step [label]="labelOne">
+                        <ng-template #labelOne>First step</ng-template>
+
+                        <div class="top-columns">
+                            <div class="col-md-6 col-lg-6 col-xxxl-6">
+                                <input type="text" nbInput fullWidth placeholder="Nombres completos">
+                                <input type="text" nbInput fullWidth placeholder="Primer apellido">
+                                <div>
+                                    <nb-card-header>Tipo de documento</nb-card-header>
+                                    <nb-select selected="1">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                                <div>
+                                    <nb-card-header>Departamento de expedición</nb-card-header>
+                                    <nb-select selected="1">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                                <div>
+                                    <nb-card-header>Common Datepicker</nb-card-header>
+                                    <input nbInput
+                                        placeholder="Form Picker"
+                                        [nbDatepicker]="formpicker">
+                                    <nb-datepicker #formpicker></nb-datepicker>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-6 col-lg-6 col-xxxl-6">
+                                <input type="text" nbInput fullWidth placeholder="Segundo apellido">
+                                <input type="text" nbInput fullWidth placeholder="Número de documento">
+                                <div>
+                                    <nb-card-header>Ciudad de expedición</nb-card-header>
+                                    <nb-select selected="1">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                                <div>
+                                    <nb-card-header>Lugar de nacimiento</nb-card-header>
+                                    <nb-select selected="1">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                                <div>
+                                    <nb-card-header>Common Datepicker</nb-card-header>
+                                    <input nbInput
+                                        placeholder="Form Picker"
+                                        [nbDatepicker]="formpicker">
+                                    <nb-datepicker #formpicker></nb-datepicker>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom-column">
+                            <div class="col-md-12 col-lg-12 col-xxxl-12">
+                                <div>
+                                    <nb-card-header>Sexo</nb-card-header>
+                                    <nb-select selected="1">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                                <input type="text" nbInput fullWidth placeholder="Edad">
+                                <div>
+                                    <nb-card-header>RH</nb-card-header>
+                                    <nb-select selected="1">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                                <input type="text" nbInput fullWidth placeholder="Dirección de residencia">
+                                <input type="text" nbInput fullWidth placeholder="Barrio y/o vereda">
+                                <input type="text" nbInput fullWidth placeholder="Teléfono o celular">
+                                <div>
+                                    <nb-card-header>EPS</nb-card-header>
+                                    <nb-select selected="1">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                                <div>
+                                    <nb-card-header>Caja de compesación</nb-card-header>
+                                    <nb-select selected="1">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                                <div>
+                                    <nb-card-header>Estrato de vivienda</nb-card-header>
+                                    <nb-select selected="1">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                                <div>
+                                    <nb-card-header>Nivel de sisbén</nb-card-header>
+                                    <nb-select selected="1">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                                <div>
+                                    <nb-card-header>Grado a ingresar</nb-card-header>
+                                    <nb-select selected="1">
+                                        <nb-option value="1">Option 1</nb-option>
+                                        <nb-option value="2">Option 2</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button nbButton nbStepperNext>next</button>
+                    </nb-step>
+
+                    <nb-step [label]="labelTwo">
+                        <ng-template #labelTwo>Second step</ng-template>
+
+                        <h3>Step content #2</h3>
+
+                        <button nbButton nbStepperPrevious>prev</button>
+                        <button nbButton nbStepperNext>next</button>
+                    </nb-step>
+
+                    <nb-step label="Third step">
+                        <h3>Step content #3</h3>
+
+                        <button nbButton nbStepperPrevious>prev</button>
+                        <button nbButton nbStepperNext>next</button>
+                    </nb-step>
+
+                    <nb-step [label]="labelFour">
+                        <ng-template #labelFour>Fourth step</ng-template>
+
+                        <h3>Step content #4</h3>
+                        
+                        <button nbButton nbStepperPrevious>prev</button>
+                        <button nbButton disabled nbStepperNext>next</button>
+                    </nb-step>
+                </nb-stepper>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

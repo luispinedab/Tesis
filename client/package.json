@@ -32,7 +32,7 @@
   "dependencies": {
     "@akveo/ng2-completer": "^9.0.1",
     "@angular/animations": "^10.2.3",
-    "@angular/cdk": "^10.2.7",
+    "@angular/cdk": "^10.0.0",
     "@angular/common": "^10.0.10",
     "@angular/compiler": "^10.0.10",
     "@angular/core": "^10.0.10",
@@ -112,6 +112,7 @@
     "ts-node": "3.2.2",
     "tslint": "~6.1.0",
     "tslint-language-service": "^0.9.9",
-    "typescript": "3.9.7"
+    "typescript": "3.9.7",
+    "webpack-cli": "^4.4.0"
   }
 }
