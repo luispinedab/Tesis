@@ -1,7 +1,8 @@
-export interface Subject{
+export class Subject{
     IDSubject?:number;
     Year?:number;
-    IDTeacher?:number;
-    IDGrade?:number;
-    IDNameSubject?:number;
+    IDTeacher?:Object;
+    IDGrade?:Object;
+    IDNameSubject?:Object;
+    IDArea?:Object;
 }

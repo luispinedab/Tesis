@@ -16,6 +16,11 @@ var subjectarea_routes_1 = __importDefault(require("./routes/subjectarea.routes"
 var subject_routes_1 = __importDefault(require("./routes/subject.routes"));
 var viewsubject_routes_1 = __importDefault(require("./routes/viewsubject.routes"));
 var achievement_routes_1 = __importDefault(require("./routes/achievement.routes"));
+var place_routes_1 = __importDefault(require("./routes/place.routes"));
+var Departament_routes_1 = __importDefault(require("./routes/Departament.routes"));
+var infostudent_routes_1 = __importDefault(require("./routes/infostudent.routes"));
+var experienciasescolares_routes_1 = __importDefault(require("./routes/experienciasescolares.routes"));
+var hermanos_routes_1 = __importDefault(require("./routes/hermanos.routes"));
 var typeorm_1 = require("typeorm");
 var app = express_1.default();
 typeorm_1.createConnection();
@@ -24,6 +29,6 @@ app.use(cors_1.default());
 app.use(morgan_1.default('dev'));
 app.use(express_1.default.json());
 //routes
-app.use(user_routes_1.default, TipoUsuario_routes_1.default, grade_routes_1.default, levelgrade_routes_1.default, namesubject_routes_1.default, subjectarea_routes_1.default, subject_routes_1.default, achievement_routes_1.default, viewsubject_routes_1.default);
+app.use(user_routes_1.default, TipoUsuario_routes_1.default, grade_routes_1.default, levelgrade_routes_1.default, namesubject_routes_1.default, subjectarea_routes_1.default, subject_routes_1.default, achievement_routes_1.default, viewsubject_routes_1.default, place_routes_1.default, Departament_routes_1.default, infostudent_routes_1.default, experienciasescolares_routes_1.default, hermanos_routes_1.default);
 app.listen(3000);
 console.log('Server on Port', 3000);
