@@ -1,6 +1,6 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from 'typeorm';
 import {Place} from './Lugar';
-@Entity("Departament", {"schema": "INFO"})
+@Entity("departament", {"schema": "INFO"})
 export class Departament {
     @PrimaryGeneratedColumn()
     IDDepartament:number;

@@ -1,6 +1,6 @@
 import {Entity,Column,PrimaryColumn,OneToMany} from "typeorm";
 import {User} from "./Usuario"
-@Entity()
+@Entity("usertype")
 export class UserType{
     @PrimaryColumn()
     IDUserType:number;

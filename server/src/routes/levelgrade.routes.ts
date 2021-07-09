@@ -1,6 +1,7 @@
 import {Router} from 'express';
 const router = Router();
-import {getNivelCurso} from '../controllers/levelgrade.controller';
+import {getNivelCurso,getNivelCursos} from '../controllers/levelgrade.controller';
 
-router.get('/NivelCursos', getNivelCurso);
+router.get('/NivelCursos', getNivelCursos);
+router.get('/NivelCursos/:id', getNivelCurso);
 export default router;

@@ -28,7 +28,7 @@ var UserType = /** @class */ (function () {
         __metadata("design:type", Array)
     ], UserType.prototype, "users", void 0);
     UserType = __decorate([
-        typeorm_1.Entity()
+        typeorm_1.Entity("usertype")
     ], UserType);
     return UserType;
 }());

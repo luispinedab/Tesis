@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit,ViewChild } from '@angular/core';
 import {AchievementsService} from '../../../services/achievements.service';
 import {Router} from '@angular/router';
 import {SmartTableData} from '../../../@core/data/smart-table';
+import { Ng2SmartTableComponent } from 'ng2-smart-table';
+import { AgregarComponent } from './agregar/agregar.component';
+import { NbDialogService } from '@nebular/theme';
+import { FormExperienciasComponent } from 'app/pages/admision/formulario/FormExperiencias/dialog-name-prompt.component';
+
 
 @Component({
   selector: 'ngx-achievements',
   templateUrl: './achievements.component.html',
   styleUrls: ['./achievements.component.scss']
 })
-export class AchievementsComponent implements OnInit {
+export class AchievementsComponent implements OnInit,AfterViewInit {
+  @ViewChild('table')
+  smartTable: Ng2SmartTableComponent;
+  searchCurso:any="";
   settings = {
+    mode: 'external',
     add:{
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -45,7 +54,12 @@ export class AchievementsComponent implements OnInit {
             list: []
           },
         },
-        filterFunction(cell?: any, search?: string,): boolean {          
+        filterFunction:(cell,search)=> {
+          if(this.searchCurso!=search)
+          { 
+            this.searchCurso=search; 
+            this.funcion1();
+          }         
           if(cell.IDLevelGrade==search)
           {
            return true;
@@ -75,7 +89,7 @@ export class AchievementsComponent implements OnInit {
           },
         },
         filterFunction(cell?: any, search?: string,): boolean {          
-          if(cell.IDSubject==search)
+          if(cell.IDNameSubject.namesubject==search)
           {
            return true;
          } else {
@@ -84,7 +98,7 @@ export class AchievementsComponent implements OnInit {
          } 
        },
         valuePrepareFunction: (data) => {
-        return data.IDSubject;
+        return data.IDNameSubject.namesubject;
       },
       },
       Achievement:{
@@ -93,11 +107,12 @@ export class AchievementsComponent implements OnInit {
       }
     }
   }
+  names: any[] = [];
   achievements:any=[];
   subjects:any=[];
   subjects1:any=[];
   levelgrades:any=[];
-  constructor(private service: SmartTableData, private achievementsService:AchievementsService,private router:Router) { }
+  constructor(private dialogService: NbDialogService,private service: SmartTableData, private achievementsService:AchievementsService,private router:Router) { }
 
   ngOnInit(): void {
     this.getNivelCursos();
@@ -109,10 +124,9 @@ export class AchievementsComponent implements OnInit {
     this.achievementsService.getLogros().subscribe( 
       res=>{
       this.achievements = res;
-      console.log(this.achievements);
+      //console.log(this.achievements);
       this.achievements.forEach(function(elemento, indice, array) {
-          array[indice].IDSubject.IDSubject=array[indice].IDSubject.IDNameSubject.namesubject;
-          //console.log(array[indice].IDSubject.IDSubject);
+          //array[indice].IDSubject.IDNameSubject=array[indice].IDSubject.IDNameSubject.namesubject;
    })
       },
       err =>console.error(err)
@@ -165,39 +179,59 @@ export class AchievementsComponent implements OnInit {
       event.confirm.reject();
     }
   }
-  onCreateConfirm(event):void { 
-    if (window.confirm('Are you sure you want to create?')) {
-      event.confirm.resolve(event.newData);
-       var newregistry = event.newData;
-       console.log("nuevo"+newregistry);
-      this.achievementsService.saveLogros(newregistry)
-    .subscribe(
-      res => {
-        this.getAchievements();
-        console.log(res);
-      },
-      err => console.error(err)
-    )
-    } else {
-      event.confirm.reject();
-    }
-  } 
-  onSaveConfirm(event):void {
-    if (window.confirm('Are you sure you want to save?')) {
-      event.confirm.resolve(event.newData);
-      var newrow=event.newData;
-      console.log(newrow);
-      console.log(this.subjects1);
-      this.achievementsService.updateLogros(newrow.IDAchievement,newrow)
-    .subscribe(
-      res =>{
-        this.getAchievements();
-        console.log(res);
-      },
-      err => console.error(err)
-    )
-    } else {
-      event.confirm.reject();
-    }
+  funcion1(){
+    this.settings.columns.IDSubject.filter.config.list=[];
+    console.log(this.subjects);
+    this.subjects.forEach(element => {
+      if(element.IDGrade.IDLevelGrade.IDLevelGrade==this.searchCurso)
+      {
+        this.settings.columns.IDSubject.filter.config.list.push({value:element.IDNameSubject.namesubject,title:element.IDNameSubject.namesubject})
+        this.settings = Object.assign({}, this.settings);
+      }
+    });
   }
+  ngAfterViewInit(): void
+  {
+    
+    this.smartTable.create.subscribe( (dataObject: any) => {
+      this.dialogService.open(AgregarComponent)
+      .onClose.subscribe(name => name && this.achievementsService.saveLogros(name).subscribe(res=>
+        this.getAchievements(),err=>console.error(err))
+        
+        );
+      console.log(this.achievements);
+    });
+    this.smartTable.edit.subscribe( (dataObject: any) => {
+      this.dialogService.open(AgregarComponent, {
+        context: {
+          title: 'Enter template name',
+          myObject: dataObject.data,
+        },
+      })
+      .onClose.subscribe(registro => registro && 
+        this.achievementsService.updateLogros(dataObject.data.IDAchievement,registro)
+        .subscribe(
+          res =>{
+            this.getAchievements();
+            console.log(res);
+          },
+          err => console.error(err)
+        )
+        );
+    });
+    this.smartTable.delete.subscribe( (dataObject: any) => {
+      if (window.confirm('Are you sure you want to delete?')) {
+        this.achievementsService.deleteLogros(dataObject.data.IDAchievement)
+        .subscribe(
+          res=>{
+            console.log(res);
+            this.getAchievements();
+          },
+          err=>console.error(err)
+        )
+      }
+     
+    });
+  }
+  
 }

@@ -13,7 +13,7 @@ const routes: Routes = [{
   children: [
     {
       path: 'administrar-usuarios',
-      component: TestComponent,
+      component: TestComponent
     },
     {
       path: 'administrar-cursos',
@@ -22,10 +22,12 @@ const routes: Routes = [{
     {
       path: 'administrar-asignaturas',
       component: SubjectsComponent,
+      
     },
     {
       path: 'administrar-logros',
       component: AchievementsComponent,
+      
     }
   ],
 }];

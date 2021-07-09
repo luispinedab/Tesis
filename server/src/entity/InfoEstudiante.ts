@@ -1,7 +1,13 @@
-import {Entity, Column, PrimaryGeneratedColumn,OneToMany} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn,OneToMany,OneToOne,JoinColumn,ManyToOne} from 'typeorm';
 import {ExperienciasEscolares} from './ExperienciasEscolares';
+import {Citas}from './Citas';
 import {Hermanos} from './Hermanos';
-@Entity()
+import {Remark} from './Observaciones';
+import {Aspirantes} from './Aspirante';
+import {Grade} from './Curso';
+import { ratings } from './Notas';
+import { absences } from './Fallas';
+@Entity("infostudent")
 export class InfoStudent {
     @PrimaryGeneratedColumn()
     IDInfoEstudiante:number;
@@ -93,8 +99,27 @@ export class InfoStudent {
     Pregunta31: string;
     @Column({nullable: true})
     Pregunta32: string;
+    @Column()
+    FechadeCreacion: Date;
+    @Column()
+    FechadeModificacion: Date;
     @OneToMany(type=> ExperienciasEscolares, experienciasescolare => experienciasescolare.IDInfoEstudiante)
     experienciasescolares:ExperienciasEscolares[];
     @OneToMany(type=> Hermanos, hermano => hermano.IDInfoEstudiante)
     hermanos:Hermanos[];
+    @OneToMany(type=> Citas, cita => cita.IDInfoEstudiante)
+    citas:Citas[];
+    @OneToMany(type=> Remark, remark => remark.IDInfoEstudiante)
+    remarks:Remark[];
+    @OneToMany(type=> ratings, nota => nota.IDStudent)
+    notas:ratings[];
+    @OneToMany(type=> absences, falla => falla.IDStudent)
+    fallas:absences[];
+    @OneToOne(() => Aspirantes)
+    @JoinColumn()
+    IDAspirante: Aspirantes;
+    @ManyToOne(type=>Grade,idgrade=>idgrade.InfoStudents)
+    IDGrade:Grade;
+    @Column("decimal", { precision: 5, scale: 2 })
+    Nota: number;
 }

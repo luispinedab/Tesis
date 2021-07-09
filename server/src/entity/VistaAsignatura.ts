@@ -5,7 +5,7 @@ import {SubjectArea} from './SubjectArea';
 import {NameSubject} from './NombreAsignatura';
 import {User} from './Usuario';
 
-@ViewEntity("ViewSubject",{ 
+@ViewEntity("viewsubject",{ 
     expression:  (connection: Connection) => connection.createQueryBuilder()
     .select("S.IDSubject", "ID")
     .addSelect("S.Year", "Year")

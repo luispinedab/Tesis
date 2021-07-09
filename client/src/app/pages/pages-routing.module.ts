@@ -1,62 +1,54 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
-
+import {AdministrarGuard} from '../shared/administrar.guard';
+import {SecretariaGuard} from '../shared/secretaria.guard';
+import { GuardsGuard } from 'app/shared/guards.guard';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
     {
-      path: 'layout',
-      loadChildren: () => import('./layout/layout.module')
-        .then(m => m.LayoutModule),
-    },
-    {
-      path: 'forms',
-      loadChildren: () => import('./forms/forms.module')
-        .then(m => m.FormsModule),
-    },
-    {
-      path: 'ui-features',
-      loadChildren: () => import('./ui-features/ui-features.module')
-        .then(m => m.UiFeaturesModule),
-    },
-    {
-      path: 'modal-overlays',
-      loadChildren: () => import('./modal-overlays/modal-overlays.module')
-        .then(m => m.ModalOverlaysModule),
-    },
-    {
-      path: 'extra-components',
-      loadChildren: () => import('./extra-components/extra-components.module')
-        .then(m => m.ExtraComponentsModule),
-    },
-    {
-      path: 'charts',
-      loadChildren: () => import('./charts/charts.module')
-        .then(m => m.ChartsModule),
-    },
-    {
-      path: 'editors',
-      loadChildren: () => import('./editors/editors.module')
-        .then(m => m.EditorsModule),
-    },
-    {
       path: 'administrar',
       loadChildren: () => import('./administrar/administrar.module')
       .then(m => m.AdministrarModule),
+      canActivate: [AdministrarGuard]
     },
     {
       path: 'admision',
       loadChildren: () => import('./admision/admision.module')
       .then(m => m.AdmisionModule),
+      
     },
     {
-      path: '',
-      redirectTo: 'administrar/administrar-usuarios',
-      pathMatch: 'full',
+      path: 'acceso',
+      loadChildren: () => import('./acceso/acceso.module')
+      .then(m => m.AccesoModule)
     },
+    {
+      path: 'secretaria',
+      loadChildren: () => import('./secretaria/secretaria.module')
+      .then(m => m.SecretariaModule),
+      canActivate:[SecretariaGuard]
+    },
+    {
+      path: 'comite',
+      loadChildren: () => import('./comite/observaciones.module')
+      .then(m => m.ObservacionesModule)
+    },
+    {
+      path: 'docente',
+      loadChildren: () => import('./docente/docente.module')
+      .then(m => m.DocenteModule)
+    },
+    {
+      path: 'estudiante',
+      loadChildren: () => import('./estudiante/estudiante.module')
+      .then(m => m.EstudianteModule),
+      //Crear Guard Estudiante
+      canActivate:[GuardsGuard]
+    }
   ],
 }];
 

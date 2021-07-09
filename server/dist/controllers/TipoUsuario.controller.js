@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getTipoUsuario = void 0;
 var typeorm_1 = require("typeorm");
 var TipoUsuario_1 = require("../entity/TipoUsuario");
-exports.getTipoUsuario = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+var getTipoUsuario = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var results;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -50,3 +50,4 @@ exports.getTipoUsuario = function (req, res) { return __awaiter(void 0, void 0, 
         }
     });
 }); };
+exports.getTipoUsuario = getTipoUsuario;

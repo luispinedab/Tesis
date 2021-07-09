@@ -1,11 +1,15 @@
 import {Request,Response} from 'express';
 import {getRepository}from 'typeorm';
 import {User}from '../entity/Usuario';
+
+var bcrypt = require('bcryptjs');
 export const getUsers = async(req:Request,res:Response):Promise<Response>=>{
     const results = await getRepository(User).find({relations:['IDUserType']});
     return res.json(results);
 };
 export const createUser = async(req:Request,res:Response):Promise<Response>=>{
+     var hashpassword=bcrypt.hashSync(req.body.Password,8);
+     req.body.Password=hashpassword;
      const newUser = getRepository(User).create(req.body);
      const results = await getRepository(User).save(newUser);
      console.log("Guardado",req.body);

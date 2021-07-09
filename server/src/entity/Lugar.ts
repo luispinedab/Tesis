@@ -1,7 +1,7 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne} from 'typeorm';
 import {Departament} from './Departamento';
 
-@Entity("Lugar", {"schema": "INFO"})
+@Entity("lugar", {"schema": "INFO"})
 export class Place {
     @PrimaryGeneratedColumn()
     IDPlace:number;

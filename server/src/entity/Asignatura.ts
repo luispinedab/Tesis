@@ -3,7 +3,10 @@ import {NameSubject} from './NombreAsignatura';
 import { User } from './Usuario';
 import { Grade} from './Curso';
 import {Achievement} from './Logro';
-@Entity()
+import {Remark} from './Observaciones';
+import { AssignedAchievement } from './assignedachievement';
+import { ratings } from './Notas';
+@Entity("subject")
 export class Subject {
     @PrimaryGeneratedColumn()
     IDSubject:number;
@@ -17,4 +20,10 @@ export class Subject {
     IDNameSubject: NameSubject; 
     @OneToMany(type => Achievement, achievement => achievement.IDSubject) 
     achievements: Achievement[];
+    @OneToMany(type => Remark, remark => remark.IDSubject) 
+    remarks: Remark[];
+    @OneToMany(type => AssignedAchievement, assignedachievement => assignedachievement.IDSubject) 
+    assignedachievements: AssignedAchievement[];
+    @OneToMany(type => ratings, rating => rating.IDSubject) 
+    notas: ratings[];
 }

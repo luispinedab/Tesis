@@ -8,16 +8,13 @@
                         <ng-template #labelOne></ng-template>
                         <h3>DATOS PERSONALES</h3>
                           <nb-card class="form-input-card">
+                            <fieldset [disabled]="fieldsetDisabled">
                             <div class="top-columns">
                                 <div class="row">
                                     <div class="col-sm-6">
                                       <div class="form-group">
                                         <label  class="label">Nombres Completos</label>
                                         <input type="text" nbInput fullWidth  formControlName="Nombres" placeholder="Nombres Completos">
-                                        <span class="form-text text-danger"
-                                              *ngIf="campoEsValido('Nombres')"> 
-                                            El campo es obligatorio
-                                        </span>
                                       </div>
                                     </div>
                                 </div>
@@ -312,11 +309,13 @@
                                     </div>
                                 </div>
                             </div>
+                          </fieldset>
                           </nb-card>
                         <div class="offset-sm-5 col-auto mr-auto">
-                            <button  nbButton status="warning" disabled nbStepperNext>prev</button>
-                            <button type="submit" nbButton status="primary"  nbStepperNext>next</button>
+                            <button  nbButton status="warning" disabled nbStepperNext>Atras</button>
+                            <button type="submit" nbButton status="primary"  nbStepperNext>Siguiente</button>
                           </div>
+                        
                     </nb-step>
 
                     <nb-step [label]="labelTwo">
@@ -325,6 +324,7 @@
                         <div class="col-md-12 col-lg-12 col-xxxl-12">
                           <nb-card class="form-input-card">
                             <nb-card-body class="result-from-dialog">
+                              <fieldset [disabled]="fieldsetDisabled">
                               <div class="table-responsive table-hover">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                   <thead>
@@ -348,11 +348,12 @@
                               </div>
                               <button nbButton type="button" status="success" (click)="formexperiencias()"><nb-icon icon="plus-circle-outline"></nb-icon>Agregar</button>
                               <button nbButton type="button" status="info"  (click)="reiniciarexperiencias()"><nb-icon icon="sync-outline"></nb-icon>Reiniciar</button>
+                            </fieldset>
                             </nb-card-body>
                           </nb-card>
                         </div>
-                        <button nbButton nbStepperPrevious>prev</button>
-                        <button nbButton status="primary"  nbStepperNext>next</button>
+                        <button nbButton nbStepperPrevious>Atras</button>
+                        <button nbButton status="primary"  nbStepperNext>Siguiente</button>
                     </nb-step>
 
                     <nb-step [label]="labelthree">
@@ -362,6 +363,7 @@
                             
                           <div class="col-sm-6">
                             <nb-card>
+                              <fieldset [disabled]="fieldsetDisabled">
                               <label class="label">EL ESTUDIANTE VIVE CON:</label>
                               <div class="row">
                                       <nb-card-body>
@@ -377,10 +379,12 @@
                                           </div>
                                         </nb-card-body>
                               </div>
+                            </fieldset>
                             </nb-card>
                           </div>
                           
                           <nb-card class="form-input-card">
+                            <fieldset [disabled]="fieldsetDisabled">
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
@@ -559,11 +563,12 @@
                                     </div>
                                   </div>
                             </div>
+                          </fieldset>
                           </nb-card>
                         </div>  
                         <div class="offset-sm-5 col-auto mr-auto">
-                            <button  nbButton  nbButton nbStepperPrevious>prev</button>
-                            <button  nbButton status="primary" nbButton nbStepperNext>next</button>
+                            <button  nbButton  nbButton nbStepperPrevious>Atras</button>
+                            <button  nbButton status="primary" nbButton nbStepperNext>Siguiente</button>
                           </div>
                     </nb-step>
 
@@ -574,6 +579,7 @@
                             <div class="col-md-12 col-lg-12 col-xxxl-12">
                               <nb-card class="form-input-card">
                                 <nb-card-body class="result-from-dialog">
+                                  <fieldset [disabled]="fieldsetDisabled">
                                   <div class="table-responsive table-hover">
                                     <table class="table table-bordered" width="100%" cellspacing="0">
                                       <thead>
@@ -595,19 +601,21 @@
                                   </div>
                                   <button nbButton type="button" status="success" (click)="open3()"><nb-icon icon="plus-circle-outline"></nb-icon>Agregar</button>
                                   <button nbButton type="button" status="info"  (click)="reiniciarhermanos()"><nb-icon icon="sync-outline"></nb-icon>Reiniciar</button>
+                                </fieldset>
                                 </nb-card-body>
                               </nb-card>
                             </div>
                         </div>
                         <div class="offset-sm-5 col-auto mr-auto">
-                          <button  nbButton nbStepperPrevious>prev</button>
-                          <button nbButton  status="primary" nbStepperNext>next</button>
+                          <button  nbButton nbStepperPrevious>Atras</button>
+                          <button nbButton  status="primary" nbStepperNext>Siguiente</button>
                         </div>
                     </nb-step>
                     <nb-step [label]="Fivestep">
                       <ng-template #Fivestep></ng-template>
                       <h3>PREGUNTAS ADICIONALES</h3>
                         <div class="row">
+                          <fieldset [disabled]="fieldsetDisabled">
                           <div class="col-sm-12">
                             <div class="form-group">
                               <label class="label">¿Cómo conoció el Colegio?</label>
@@ -618,8 +626,10 @@
                              </span> 
                             </div>
                           </div>
+                        </fieldset>
                         </div>
                         <div class="row">
+                          <fieldset [disabled]="fieldsetDisabled">
                           <div class="col-sm-12">
                             <div class="form-group">
                               <label class="label">¿Cómo tuvo conocimiento del Proceso de Admisión?</label>
@@ -630,7 +640,9 @@
                              </span> 
                             </div>
                           </div>
+                        </fieldset>
                         </div>
+                        <fieldset [disabled]="fieldsetDisabled">
                           <label for="inputViveCon" class="label">¿En este Colegio el aspirante ha realizado el Proceso de Admisión?
                           </label>
                           <div class="row">
@@ -649,9 +661,10 @@
                                             </div>
                                   </div>
                           </div>
+                        </fieldset>
                           <div class="offset-sm-5 col-auto mr-auto">
-                            <button  nbButton nbStepperPrevious>prev</button>
-                            <button type="submit"nbButton (click)="getvalues()" status="primary" nbStepperNext>Submit</button>
+                            <button  nbButton nbStepperPrevious>Atras</button>
+                            <button [disabled]="fieldsetDisabled"type="submit"nbButton (click)="getvalues()" status="primary" nbStepperNext>Enviar</button>
                           </div>
                     </nb-step>
                 </nb-stepper>

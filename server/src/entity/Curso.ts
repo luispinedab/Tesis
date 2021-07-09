@@ -2,8 +2,13 @@ import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany} from 'type
 import { User } from './Usuario';
 import {LevelGrade} from './NivelCurso';
 import {Subject} from './Asignatura';
+import { AssignedAchievement } from './assignedachievement';
+import { InfoStudent } from './InfoEstudiante';
+import {ratings} from './Notas';
+import { absences } from './Fallas';
+import { Question } from './Pregutas';
 
-@Entity()
+@Entity("grade")
 export class Grade {
     @PrimaryGeneratedColumn()
     IDGrade:number;
@@ -17,4 +22,12 @@ export class Grade {
     IDDirector: User;
     @OneToMany(type => Subject, subject => subject.IDGrade) 
     subjects: Subject[];
+    @OneToMany(type => AssignedAchievement, assignedachievement => assignedachievement.IDGrade) 
+    assignedachievements: AssignedAchievement[];
+    @OneToMany(type=> InfoStudent, info => info.IDGrade)
+    InfoStudents:InfoStudent[];
+    @OneToMany(type=> ratings, rating => rating.IDGrade)
+    Notas:ratings[];
+    @OneToMany(type=> absences, absence => absence.IDGrade)
+    Fallas:absences[];
 }

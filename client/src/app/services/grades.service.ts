@@ -13,6 +13,9 @@ export class GradesService {
   getNivelCursos(){
     return this.http.get(`${this.API_URI}/NivelCursos`);
   }
+  getIDNivelCurso(id:string){
+    return this.http.get(`${this.API_URI}/NivelCursos/${id}`);
+  }
   getCursos(){
     return this.http.get(`${this.API_URI}/Cursos`);
   }

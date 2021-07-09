@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {GradesService} from '../../../services/grades.service';
 import {UsersService} from '../../../services/users.service';
 import {Router} from '@angular/router';
-import {DatepickerComponent} from '../../forms/datepicker/datepicker.component';
 import { SmartTableData } from '../../../@core/data/smart-table';
-import { NbDatepicker } from '@nebular/theme';
-
+import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
 
 @Component({
   selector: 'ngx-grades',
@@ -34,24 +32,19 @@ export class GradesComponent{
       Year: {
         title: 'Año',
         type: 'string',
-        defaultValue: "2021",
-        /*editor: {
-          type: 'custom',
-          component: DatepickerComponent,
-        }*/
         editor:
         {selectText: 'Select',
           type: 'list',
           config:
           { 
-            list: [{title:'2020',value:2020},{title:'2021',value:2021},{title:'2022',value:2022}]
+            list: []
           },  
         },
         filter: {
           type: 'list',
           config: {
             selectText: 'Select',
-            list: [{title:'2020',value:2020},{title:'2021',value:2021},{title:'2022',value:2022}]
+            list: []
           },
         },
       },
@@ -119,6 +112,7 @@ export class GradesComponent{
     },
     },
   };
+  años: any=[];
   grades: any = [];
   usuarios: any = [];
   niveles: any=[];
@@ -126,6 +120,7 @@ export class GradesComponent{
   }
 
   ngOnInit(): void {
+    this.getGrades();
     this.getlevelGrades();
     this.getUsers();
     this.getGrades();
@@ -146,7 +141,25 @@ export class GradesComponent{
   getGrades(){
     this.gradesService.getCursos().subscribe(
       res=>{
-        this.grades = res; 
+        this.grades = res;
+        var anio= new Date();
+          this.settings.columns.Year.editor.config.list=[{value:anio.getFullYear(),title:anio.getFullYear().toString()}];
+        if(this.grades.length==0)
+        {
+            this.settings.columns.Year.filter.config.list.push({value:anio.getFullYear(),title:anio.getFullYear().toString()});
+            
+        }
+        else{
+          this.grades.forEach(element => {
+            if(this.años.includes(element.Year)==false)
+            {
+              this.settings.columns.Year.filter.config.list.push({value:element.Year,title:element.Year});
+              this.settings = Object.assign({}, this.settings);
+            }
+            this.años.push(element.Year);
+          });
+        }
+        
         console.log(this.grades);
       },
       err =>console.error(err)

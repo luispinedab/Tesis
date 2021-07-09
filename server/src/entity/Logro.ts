@@ -1,7 +1,8 @@
-import {Entity,Column,ManyToOne,PrimaryGeneratedColumn} from 'typeorm';
+import {Entity,Column,ManyToOne,PrimaryGeneratedColumn,OneToMany} from 'typeorm';
 import {LevelGrade} from './NivelCurso';
 import {Subject} from './Asignatura';
-@Entity()
+import { AssignedAchievement } from './assignedachievement';
+@Entity("achievement")
 export class Achievement{
     @PrimaryGeneratedColumn()
     IDAchievement:number; 
@@ -11,4 +12,6 @@ export class Achievement{
     IDLevelGrade: LevelGrade;
     @ManyToOne(type=>Subject,IDSubject=>IDSubject.achievements)
     IDSubject: Subject;
+    @OneToMany(type => AssignedAchievement, assignedachievement => assignedachievement.IDAchievement) 
+    assignedachievements: AssignedAchievement[];
 }

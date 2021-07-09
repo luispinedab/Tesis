@@ -1,0 +1,26 @@
+// tr td.ng2-smart-actions {
+//   display: flex;
+//   }
+  
+//   .ng2-smart-action-custom-custom {
+//   padding-top: 0.8em;
+//   }
+//   .ng2-smart-action-delete-delete {
+//   padding-top: 0.8em;
+//   }
+
+  :host ::ng-deep ng2-st-tbody-edit-delete {display: flex !important;
+    height: 0 !important;
+  }
+
+  
+:host ::ng-deep ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    font-size: 1.1em;
+  }
+  
+  :host ::ng-deep ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
+    color: #5dcfe3;
+  }

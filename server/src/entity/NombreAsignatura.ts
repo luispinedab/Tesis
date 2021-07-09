@@ -2,7 +2,7 @@ import {Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne} from 'type
 import {Subject} from './Asignatura';
 import {SubjectArea} from './SubjectArea';
 
-@Entity("NameSubject", {"schema": "INFO"})
+@Entity("namesubject", {"schema": "INFO"})
 export class NameSubject {
     @PrimaryGeneratedColumn()
     IDNameSubject:number;

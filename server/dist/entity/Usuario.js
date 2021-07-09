@@ -14,6 +14,8 @@ var typeorm_1 = require("typeorm");
 var TipoUsuario_1 = require("./TipoUsuario");
 var Curso_1 = require("./Curso");
 var Asignatura_1 = require("./Asignatura");
+var Notas_1 = require("./Notas");
+var Fallas_1 = require("./Fallas");
 var User = /** @class */ (function () {
     function User() {
     }
@@ -65,8 +67,16 @@ var User = /** @class */ (function () {
         typeorm_1.OneToMany(function (type) { return Asignatura_1.Subject; }, function (subject) { return subject.IDTeacher; }),
         __metadata("design:type", Array)
     ], User.prototype, "subjects", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function (type) { return Notas_1.ratings; }, function (rating) { return rating.IDDocente; }),
+        __metadata("design:type", Array)
+    ], User.prototype, "notas", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function (type) { return Fallas_1.absences; }, function (absence) { return absence.IDDocente; }),
+        __metadata("design:type", Array)
+    ], User.prototype, "fallas", void 0);
     User = __decorate([
-        typeorm_1.Entity()
+        typeorm_1.Entity("user")
     ], User);
     return User;
 }());

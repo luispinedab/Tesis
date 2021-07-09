@@ -1,6 +1,6 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne} from 'typeorm';
 import {InfoStudent} from './InfoEstudiante';
-@Entity("ExperienciasEscolares")
+@Entity("experienciasescolares")
 export class ExperienciasEscolares {
     @PrimaryGeneratedColumn()
     IDExperienciasEscolares:number;

@@ -2,7 +2,7 @@ import {Request,Response} from 'express';
 import {getRepository}from 'typeorm';
 import {Subject}from '../entity/Asignatura';
 export const getAsignaturas = async(req:Request,res:Response):Promise<Response>=>{
-    const results = await getRepository(Subject).find({relations:['IDTeacher','IDGrade','IDNameSubject','IDNameSubject.IDArea']});
+    const results = await getRepository(Subject).find({relations:['IDTeacher','IDGrade','IDGrade.IDLevelGrade','IDNameSubject','IDNameSubject.IDArea']});
     return res.json(results);
 };
 export const createAsignatura = async(req:Request,res:Response):Promise<Response>=>{

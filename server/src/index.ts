@@ -13,10 +13,18 @@ import SubjectRoutes from './routes/subject.routes';
 import ViewAsignaturaRoutes from './routes/viewsubject.routes';
 import AchiecementRoutes from './routes/achievement.routes';
 import  PlaceRoutes from './routes/place.routes';
-import DepartamentRoutes from './routes/Departament.routes'
-import InfostudentRoutes from './routes/infostudent.routes'
-import ExperienciasescolaresRoutes from './routes/experienciasescolares.routes'
-import HermanosRoutes from './routes/hermanos.routes'
+import DepartamentRoutes from './routes/Departament.routes';
+import LoginRoutes from './routes/login.routes';
+import InfostudentRoutes from './routes/infostudent.routes';
+import ExperienciasescolaresRoutes from './routes/experienciasescolares.routes';
+import HermanosRoutes from './routes/hermanos.routes';
+import CitasRoutes from './routes/Citas.routes';
+import FallasRoutes from './routes/fallas.routes';
+import AspirantesRoutes from './routes/Aspirantes.routes';
+import PreguntasRoutes from './routes/Preguntas.routes';
+import ObservacionesRoutes from './routes/Observaciones.routes';
+
+
 import {createConnection} from 'typeorm';
 const app = express();
 
@@ -27,7 +35,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 //routes
-app.use(UserRoutes,TipoUsuarioRoutes,GradeRoutes,LevelGradeRoutes,NameSubjectRoutes,SubjectAreaRoutes,SubjectRoutes,AchiecementRoutes,ViewAsignaturaRoutes,PlaceRoutes,DepartamentRoutes,InfostudentRoutes,ExperienciasescolaresRoutes,HermanosRoutes);
+app.use(FallasRoutes,UserRoutes,LoginRoutes,TipoUsuarioRoutes,GradeRoutes,LevelGradeRoutes,NameSubjectRoutes,SubjectAreaRoutes,SubjectRoutes,AchiecementRoutes,ViewAsignaturaRoutes,PlaceRoutes,DepartamentRoutes,InfostudentRoutes,ExperienciasescolaresRoutes,HermanosRoutes,CitasRoutes,AspirantesRoutes,ObservacionesRoutes,PreguntasRoutes);
 
 
 app.listen(3000);

@@ -1,4 +1,4 @@
-export interface InfoEstudiante{
+export class InfoEstudiante{
     IDInfoEstudiante?:number;
     Nombres?: string;
     PrimerApellido?:string;
@@ -44,4 +44,7 @@ export interface InfoEstudiante{
     Pregunta3?:string;
     Pregunta31?:string;
     Pregunta32?:string;
+    IDAspirante:number;
+    IDGrade?:number;
+    Nota?:number;
 }

@@ -1,27 +1,28 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import {UserListComponent} from '../app/components/user-list/user-list.component';
 import {NavigationComponent} from '../app/components/navigation/navigation.component';
+
 import {
   NbAuthComponent,
-  NbLoginComponent,
   NbLogoutComponent,
   NbRegisterComponent,
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
-import { AdmisionComponent } from './pages/admision/admision.component';
-import { FormularioComponent } from './pages/admision/formulario/formulario.component';
+import {RespasswordComponent} from './pages/acceso/respassword/respassword.component';
+import {LoginComponent} from './pages/acceso/login/login.component';
 
 export const routes: Routes = [
   {
     path: 'pages',
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
+      
   },
   {
     path: '',
-    redirectTo: 'administrar',
+    redirectTo: 'auth/login',
     pathMatch: 'full'
   },
   {
@@ -42,7 +43,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'login',
-        component: NbLoginComponent,
+        component: LoginComponent,
       },
       {
         path: 'register',
@@ -58,19 +59,10 @@ export const routes: Routes = [
       },
       {
         path: 'reset-password',
-        component: NbResetPasswordComponent,
+        component: RespasswordComponent,
       }
     ],
-  },
-  {
-    path: 'admision',
-    component: AdmisionComponent,
-    children: [
-      { path: 'formulario',
-      component: FormularioComponent,
-    }
-    ],   
-  },
+  }
 ];
 const config: ExtraOptions = {
   useHash: false,

@@ -39,7 +39,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.updateUser = exports.getUser = exports.createUser = exports.getUsers = void 0;
 var typeorm_1 = require("typeorm");
 var Usuario_1 = require("../entity/Usuario");
-exports.getUsers = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+var bcrypt = require('bcryptjs');
+var getUsers = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var results;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -50,11 +51,14 @@ exports.getUsers = function (req, res) { return __awaiter(void 0, void 0, void 0
         }
     });
 }); };
-exports.createUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var newUser, results;
+exports.getUsers = getUsers;
+var createUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var hashpassword, newUser, results;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                hashpassword = bcrypt.hashSync(req.body.Password, 8);
+                req.body.Password = hashpassword;
                 newUser = typeorm_1.getRepository(Usuario_1.User).create(req.body);
                 return [4 /*yield*/, typeorm_1.getRepository(Usuario_1.User).save(newUser)];
             case 1:
@@ -64,7 +68,8 @@ exports.createUser = function (req, res) { return __awaiter(void 0, void 0, void
         }
     });
 }); };
-exports.getUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+exports.createUser = createUser;
+var getUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var results;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -75,7 +80,8 @@ exports.getUser = function (req, res) { return __awaiter(void 0, void 0, void 0,
         }
     });
 }); };
-exports.updateUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+exports.getUser = getUser;
+var updateUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var user, results;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -92,7 +98,8 @@ exports.updateUser = function (req, res) { return __awaiter(void 0, void 0, void
         }
     });
 }); };
-exports.deleteUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+exports.updateUser = updateUser;
+var deleteUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var results;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -103,3 +110,4 @@ exports.deleteUser = function (req, res) { return __awaiter(void 0, void 0, void
         }
     });
 }); };
+exports.deleteUser = deleteUser;

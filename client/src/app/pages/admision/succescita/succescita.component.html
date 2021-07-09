@@ -1,0 +1,45 @@
+  <nb-card>
+    <nb-card-body>
+      <nb-stepper orientation="horizontal">
+        <nb-step [label]="labelOne">
+          <ng-template #labelOne>CITA</ng-template>
+          <nb-alert status="success" closable>Tiene una cita asignada para el día {{dt.getDate()}}/{{dt.getMonth()+1}}/{{dt.getFullYear()}} a las {{dt.getHours()}}:{{dt.getMinutes()}}</nb-alert>
+          <button nbButton disabled nbStepperNext>Atras</button>
+          <button nbButton nbStepperNext>Siguiente</button>
+        </nb-step>
+        <nb-step [label]="labelTwo">
+          <ng-template #labelTwo>EVALUACIÓN DIAGNOSTICA</ng-template>
+          <h4>CONSULTAR RESULTADO</h4>
+          <p class="lorem">
+            En esta sección se puede consultar el resultado de la evaluación diagnostica.
+          </p>
+          <div class="row">
+            <button nbButton status="info"  nbPopover="NOTA: {{Nota}}!">CONSULTAR</button>
+          </div>
+          <button nbButton nbStepperPrevious>Atras</button>
+          <button nbButton nbStepperNext>Siguiente</button>
+        </nb-step>
+        <nb-step label="AÑADIR DOCUMENTOS">
+          <h4>Step content #3</h4>
+          <p class="lorem">
+            Lorizzle ipsum dolizzle stuff fizzle, consectetuer adipiscing break it down.
+            Nullizzle sapien velizzle, my shizz pimpin', shizzle my nizzle crocodizzle shut the shizzle up,
+            gravida vizzle, dang.
+          </p>
+          <button nbButton nbStepperPrevious>Atras</button>
+          <button nbButton nbStepperNext>Siguiente</button>
+        </nb-step>
+        <nb-step [label]="labelFour">
+          <ng-template #labelFour>INSCRIPCIÓN</ng-template>
+          <h4>Step content #4</h4>
+          <p class="lorem">
+            Lorizzle ipsum dolizzle stuff fizzle, consectetuer adipiscing break it down.
+            Nullizzle sapien velizzle, my shizz pimpin', shizzle my nizzle crocodizzle shut the shizzle up,
+            gravida vizzle, dang.
+          </p>
+          <button nbButton nbStepperPrevious>Atras</button>
+          <button nbButton disabled nbStepperNext>Siguiente</button>
+        </nb-step>
+      </nb-stepper>
+    </nb-card-body>
+  </nb-card>

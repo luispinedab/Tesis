@@ -2,8 +2,13 @@ import {Request,Response} from 'express';
 import {getRepository}from 'typeorm';
 import {ExperienciasEscolares}from '../entity/ExperienciasEscolares';
 export const getExperienciasEscolares = async(req:Request,res:Response):Promise<Response>=>{
-    const results = await getRepository(ExperienciasEscolares).find();
-    return res.json(results);
+    const results1 = await getRepository(ExperienciasEscolares)
+    .createQueryBuilder("exp") // first argument is an alias. Alias is what you are selecting - photos. You must specify it.
+    .innerJoinAndSelect("exp.IDInfoEstudiante", "infostudent")
+    .innerJoinAndSelect("infostudent.IDAspirante", "Aspirantes")
+    .where("Aspirantes.UserState = 1")
+    .getMany(); 
+    return res.json(results1);
 };
 export const createExperienciasEscolar = async(req:Request,res:Response):Promise<Response>=>{
      const newUser = getRepository(ExperienciasEscolares).create(req.body);
@@ -12,8 +17,8 @@ export const createExperienciasEscolar = async(req:Request,res:Response):Promise
      return res.json(results);
 };
 export const getExperienciasEscolar = async(req:Request,res:Response):Promise<Response>=>{
-    const results = await getRepository(ExperienciasEscolares).findOne(req.params.id);
-    return res.json(results);
+    const exp = await getRepository(ExperienciasEscolares).createQueryBuilder("ExperienciasEscolares").where(`ExperienciasEscolares.IDInfoEstudiante=${req.params.id}`).getMany();
+    return res.json(exp);
 };
 export const updateExperienciasEscolar = async(req:Request,res:Response):Promise<Response>=>{
     const user = await getRepository(ExperienciasEscolares).findOne(req.params.id);

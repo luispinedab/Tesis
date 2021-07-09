@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
-
+import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService,NbMenuItem} from '@nebular/theme';
+import decode from 'jwt-decode';
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
-import { map, takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import {Router} from '@angular/router';
+import {LoginService} from '../../../services/login.service';
 
 @Component({
   selector: 'ngx-header',
@@ -16,45 +18,32 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
-
-  themes = [
-    {
-      value: 'default',
-      name: 'Light',
-    },
-    {
-      value: 'dark',
-      name: 'Dark',
-    },
-    {
-      value: 'cosmic',
-      name: 'Cosmic',
-    },
-    {
-      value: 'corporate',
-      name: 'Corporate',
-    },
-  ];
+  nombrepersona:any;
+  tipousuario:any;
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [ { title: 'Perfil',data:{id:'Profile'} }, { title: 'Cerrar sesión',data:{id:'logout'}} ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private router : Router,
+              private loginservice:LoginService
+              ) {
   }
 
   ngOnInit() {
+    this.getinfo();
     this.currentTheme = this.themeService.currentTheme;
 
     this.userService.getUsers()
       .pipe(takeUntil(this.destroy$))
       .subscribe((users: any) => this.user = users.nick);
-
+    
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(
@@ -62,6 +51,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
+      
+      this.menuService.onItemClick()
+      .pipe(
+        filter(({ tag }) => tag === 'my-context-menu'),
+        map(({ item: { title } }) => title),
+      )
+      .subscribe(title =>  {
+        if(title=="Cerrar sesión")
+        { 
+          this.loginservice.logout().subscribe((res)=>{
+          localStorage.setItem('usuario',res['Token']);
+          this.router.navigate(['/auth/login']);
+            console.log(res);
+          },
+            err=>console.error(err))
+        }
+      });
+   
 
     this.themeService.onThemeChange()
       .pipe(
@@ -90,5 +97,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome() {
     this.menuService.navigateHome();
     return false;
+  }
+  getinfo(){
+    var token = localStorage.getItem('usuario');
+    var tokenbyload:any = decode(token);
+    this.nombrepersona = tokenbyload.nombre;
+    this.tipousuario = tokenbyload.tipo;
   }
 }

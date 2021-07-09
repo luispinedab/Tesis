@@ -6,6 +6,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
+
 @NgModule({
   imports: [
     Ng2SmartTableModule,
@@ -18,7 +19,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbTreeGridModule,
   ],
   declarations: [
-    PagesComponent,
+    PagesComponent
   ],
 })
 export class PagesModule {
